@@ -236,6 +236,53 @@
     .founder-booking-badge{ position:fixed; bottom:24px; right:24px; z-index:9999; display:flex; align-items:center; gap:8px; padding:12px 20px; background:rgba(17,17,19,0.9); color:#fff; border:1px solid var(--border); border-radius:14px; cursor:pointer; font-family:inherit; font-size:14px; font-weight:600; box-shadow:0 8px 32px rgba(0,0,0,0.4); transition:all 0.3s; text-decoration:none; backdrop-filter:blur(12px); }
     .founder-booking-badge:hover{ transform:translateY(-2px); box-shadow:0 12px 40px rgba(0,0,0,0.5); border-color:rgba(249,115,22,0.2); color:#fff; }
     .founder-booking-badge svg{ width:18px; height:18px; flex-shrink:0; }
+  
+    /* ── Aha Morphing Animation ── */
+    .aha-wrap{max-width:900px;margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,0.5);background:#111113;}
+    .aha-chrome{background:#161618;padding:0.6rem 1rem;display:flex;align-items:center;gap:0.75rem;border-bottom:1px solid var(--border);}
+    .aha-dots span{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px;}
+    .aha-status{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:600;padding:0.3rem 0.75rem;border-radius:8px;transition:all 0.6s ease;}
+    .aha-status.pain{background:rgba(239,68,68,0.12);color:#ef4444;}
+    .aha-status.syncing{background:rgba(168,85,247,0.12);color:#a855f7;}
+    .aha-status.done{background:rgba(34,197,94,0.12);color:#22c55e;}
+    .aha-body{padding:1.5rem 1.5rem 1rem;position:relative;}
+    .aha-caption{text-align:center;padding:0.75rem 0 1rem;font-size:1.1rem;font-weight:700;transition:all 0.5s ease;min-height:2.5rem;}
+    .aha-form{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;transition:all 0.8s ease;}
+    .aha-field{padding:0.6rem 0.75rem;border-radius:8px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;transition:all 0.8s ease;position:relative;overflow:hidden;}
+    .aha-field-label{font-size:0.55rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.3rem;transition:color 0.6s ease;}
+    .aha-field-value{font-size:0.8rem;font-weight:500;transition:color 0.6s ease;}
+    .aha-field.full{grid-column:1/-1;}
+    .aha-form.state-pain .aha-field{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);}
+    .aha-form.state-pain .aha-field-label{color:rgba(239,68,68,0.6);}
+    .aha-form.state-pain .aha-field-value{color:var(--text-muted);}
+    .aha-form.state-pain .aha-field.has-error{border-color:#ef4444;box-shadow:0 0 0 1px rgba(239,68,68,0.3);}
+    .aha-form.state-pain .aha-field.has-error .aha-field-value{color:#ef4444;text-decoration:line-through;}
+    .aha-form.state-syncing .aha-field{background:rgba(168,85,247,0.05);border:1px solid rgba(168,85,247,0.15);}
+    .aha-form.state-syncing .aha-field-label{color:rgba(168,85,247,0.6);}
+    .aha-form.state-syncing .aha-field-value{color:#a855f7;}
+    .aha-form.state-done .aha-field{background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.18);}
+    .aha-form.state-done .aha-field-label{color:rgba(34,197,94,0.6);}
+    .aha-form.state-done .aha-field-value{color:var(--text-primary);}
+    .aha-form.state-done .aha-field.has-error{border-color:rgba(34,197,94,0.18);box-shadow:none;}
+    .aha-form.state-done .aha-field.has-error .aha-field-value{color:var(--text-primary);text-decoration:none;}
+    .aha-scan{height:2px;background:transparent;margin:0.75rem 0 0;border-radius:2px;overflow:hidden;position:relative;}
+    .aha-scan-bar{position:absolute;top:0;left:0;width:0;height:100%;border-radius:2px;transition:width 1.2s ease-in-out;}
+    .aha-timer-strip{display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-top:0.75rem;padding:0.5rem 0;font-family:'JetBrains Mono',monospace;font-size:0.75rem;transition:all 0.5s ease;min-height:2rem;}
+    @media (max-width:600px){.aha-form{grid-template-columns:1fr;}}
+
+    /* ── Logical Closer ── */
+    .closer-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:900px;margin:0 auto;}
+    .closer-card{border-radius:16px;padding:2rem 1.75rem;}
+    .closer-card-old{background:rgba(239,68,68,0.03);border:1px solid rgba(239,68,68,0.12);}
+    .closer-card-new{background:rgba(34,197,94,0.03);border:1px solid rgba(34,197,94,0.15);}
+    .closer-label{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;font-family:'JetBrains Mono',monospace;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem;}
+    .closer-item{display:flex;align-items:flex-start;gap:0.75rem;margin-bottom:1.15rem;}
+    .closer-item:last-child{margin-bottom:0;}
+    .closer-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+    .closer-icon-x{background:rgba(239,68,68,0.1);}
+    .closer-icon-check{background:rgba(34,197,94,0.1);}
+    @media (max-width:700px){.closer-grid{grid-template-columns:1fr;}}
+
   </style>
 </head>
 <body>
@@ -395,6 +442,165 @@
       </div>
     </div>
   </section>
+
+  <!-- AHA MOMENT — Live UI Morphing Animation -->
+  <section id="aha-section" style="padding:2rem 0 4rem;">
+    <div class="container">
+      <p class="section-label reveal">See it in action</p>
+      <h2 class="section-title reveal" style="margin-bottom:2rem;">
+        From <span class="gradient-text">manual invoicing</span> to done in seconds.
+      </h2>
+      <div class="aha-wrap reveal-scale">
+        <div class="aha-chrome">
+          <div class="aha-dots">
+            <span style="background:#ef4444;"></span>
+            <span style="background:#eab308;"></span>
+            <span style="background:#22c55e;"></span>
+          </div>
+          <div id="aha-status" class="aha-status pain">Manual Entry</div>
+        </div>
+        <div class="aha-body">
+          <div id="aha-caption" class="aha-caption" style="color:#ef4444;">Re-typing completed job details into invoice template...</div>
+          <div id="aha-form" class="aha-form state-pain">
+            <div class="aha-field has-error">
+              <div class="aha-field-label">Customer</div>
+              <div class="aha-field-value" data-pain="Johnson... or Johnston?" data-done="Mike Johnston — 42 Oak Lane">Johnson... or Johnston?</div>
+            </div>
+            <div class="aha-field">
+              <div class="aha-field-label">Job Type</div>
+              <div class="aha-field-value" data-pain="AC repair... or maintenance?" data-done="AC Repair — Emergency Call">AC repair... or maintenance?</div>
+            </div>
+            <div class="aha-field">
+              <div class="aha-field-label">Tech Assigned</div>
+              <div class="aha-field-value" data-pain="(checking dispatch board)" data-done="Carlos R. — Senior Tech">(checking dispatch board)</div>
+            </div>
+            <div class="aha-field has-error">
+              <div class="aha-field-label">Parts Used</div>
+              <div class="aha-field-value" data-pain="(reading tech's handwriting...)" data-done="Capacitor 45/5 MFD + Contactor 2P 40A">(reading tech's handwriting...)</div>
+            </div>
+            <div class="aha-field full">
+              <div class="aha-field-label">Labor Hours</div>
+              <div class="aha-field-value" data-pain="2.5h? Tech says 3h..." data-done="2.75 hrs @ $125/hr = $343.75">2.5h? Tech says 3h...</div>
+            </div>
+            <div class="aha-field full">
+              <div class="aha-field-label">Parts Cost</div>
+              <div class="aha-field-value" data-pain="(looking up prices...)" data-done="$87.50 — matched to supplier invoice">(looking up prices...)</div>
+            </div>
+            <div class="aha-field full">
+              <div class="aha-field-label">Total</div>
+              <div class="aha-field-value" data-pain="$... (calculator...)" data-done="$431.25 + tax = $466.82">$... (calculator...)</div>
+            </div>
+            <div class="aha-field full">
+              <div class="aha-field-label">Payment Status</div>
+              <div class="aha-field-value" data-pain="(check QuickBooks later)" data-done="Invoice #4521 sent — payment link included">(check QuickBooks later)</div>
+            </div>
+          </div>
+          <div class="aha-scan"><div id="aha-scan-bar" class="aha-scan-bar"></div></div>
+          <div id="aha-timer" class="aha-timer-strip" style="color:#ef4444;">
+            <span id="aha-timer-text">~8 minutes per invoice</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGICAL CLOSER — Old Way vs. New Way -->
+  <section style="padding:4rem 0 5rem;">
+    <div class="container">
+      <p class="section-label reveal">Why switch</p>
+      <h2 class="section-title reveal" style="margin-bottom:2.5rem;">
+        The old way vs. <span class="gradient-text">the JobberInvoice way.</span>
+      </h2>
+      <div class="closer-grid">
+        <div class="closer-card closer-card-old reveal reveal-delay-1">
+          <div class="closer-label" style="color:#ef4444;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            The Old Way
+          </div>
+          <div class="closer-item">
+            <div class="closer-icon closer-icon-x">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <div>
+              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Double-entry into QuickBooks</p>
+              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Techs close jobs in Jobber, then someone re-types parts, labor, and totals into QuickBooks. Every. Single. Job.</p>
+            </div>
+          </div>
+          <div class="closer-item">
+            <div class="closer-icon closer-icon-x">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <div>
+              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Invoices lag days behind jobs</p>
+              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Office staff batches invoices weekly. Customers forget the work by the time they get the bill — and pay slower.</p>
+            </div>
+          </div>
+          <div class="closer-item">
+            <div class="closer-icon closer-icon-x">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <div>
+              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Line items don't match</p>
+              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Jobber has one description, QuickBooks has another. Tax time becomes a reconciliation nightmare.</p>
+            </div>
+          </div>
+          <div class="closer-item">
+            <div class="closer-icon closer-icon-x">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <div>
+              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">No real-time cash visibility</p>
+              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Revenue in Jobber never matches QuickBooks. You're guessing at cash flow until month-end.</p>
+            </div>
+          </div>
+        </div>
+        <div class="closer-card closer-card-new reveal reveal-delay-2">
+          <div class="closer-label" style="color:#22c55e;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            With JobberInvoice
+          </div>
+          <div class="closer-item">
+            <div class="closer-icon closer-icon-check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Auto-sync from Jobber to QuickBooks</p>
+              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Job closes in Jobber, invoice appears in QuickBooks. Parts, labor, taxes — all mapped automatically.</p>
+            </div>
+          </div>
+          <div class="closer-item">
+            <div class="closer-icon closer-icon-check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Same-day invoicing</p>
+              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Customers get invoiced the day the job is done. Faster billing, faster payments.</p>
+            </div>
+          </div>
+          <div class="closer-item">
+            <div class="closer-icon closer-icon-check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Matched line items, always</p>
+              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Jobber descriptions map to QuickBooks items and accounts. Reconciliation takes minutes, not hours.</p>
+            </div>
+          </div>
+          <div class="closer-item">
+            <div class="closer-icon closer-icon-check">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Real-time revenue dashboard</p>
+              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Know exactly what's billed, what's paid, and what's outstanding — updated every sync cycle.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
 
   <!-- ═══════════════════════════════════════════
        FOUNDER CREDIBILITY
@@ -958,6 +1164,84 @@
         Calendly.initPopupWidget({ url: 'https://calendly.com/leanaistudio/founder-call?utm_source=jobberinvoice&utm_medium=lp&utm_campaign=founder-call' });
       }
     }
+  
+    /* ── Aha Morphing Animation ── */
+    (function() {
+      var form = document.getElementById('aha-form');
+      var status = document.getElementById('aha-status');
+      var caption = document.getElementById('aha-caption');
+      var scanBar = document.getElementById('aha-scan-bar');
+      var timer = document.getElementById('aha-timer');
+      var timerText = document.getElementById('aha-timer-text');
+      if (!form || !status) return;
+      var fields = form.querySelectorAll('.aha-field-value');
+      var section = document.getElementById('aha-section');
+      var started = false;
+      function runCycle() {
+        form.className = 'aha-form state-pain';
+        status.className = 'aha-status pain';
+        status.textContent = 'Manual Entry';
+        caption.style.color = '#ef4444';
+        caption.textContent = 'Re-typing completed job details into invoice template...';
+        scanBar.style.width = '0';
+        scanBar.style.background = 'transparent';
+        timer.style.color = '#ef4444';
+        timerText.textContent = '~8 minutes per invoice';
+        fields.forEach(function(f) { f.textContent = f.dataset.pain; });
+        setTimeout(function() {
+          form.className = 'aha-form state-syncing';
+          status.className = 'aha-status syncing';
+          status.textContent = 'Syncing Jobber...';
+          caption.style.color = '#a855f7';
+          caption.textContent = 'JobberInvoice pulling job data from Jobber...';
+          scanBar.style.background = 'linear-gradient(90deg, #a855f7, #8b5cf6)';
+          scanBar.style.width = '100%';
+          timer.style.color = '#a855f7';
+          timerText.textContent = 'Pulling job data...';
+        }, 3000);
+        setTimeout(function() {
+          fields.forEach(function(f, i) {
+            setTimeout(function() { f.textContent = f.dataset.done; }, i * 150);
+          });
+        }, 4500);
+        setTimeout(function() {
+          form.className = 'aha-form state-done';
+          status.className = 'aha-status done';
+          status.textContent = 'Done in 6s';
+          caption.style.color = '#22c55e';
+          caption.textContent = 'Invoice generated. Parts + labor matched. Ready to send.';
+          scanBar.style.background = 'linear-gradient(90deg, #22c55e, #16a34a)';
+          timer.style.color = '#22c55e';
+          timerText.textContent = '6 seconds — zero re-entry';
+        }, 6000);
+        setTimeout(function() { runCycle(); }, 10000);
+      }
+      var ahaObs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting && !started) {
+          started = true;
+          runCycle();
+          ahaObs.unobserve(section);
+        }
+      }, { threshold: 0.3 });
+      ahaObs.observe(section);
+    })();
+
   </script>
+
+<!-- DKI: Dynamic Keyword Insertion — replaces hero H1 with ?headline= param -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var params = new URLSearchParams(window.location.search);
+  var hl = params.get('headline');
+  if (hl) {
+    var h1 = document.querySelector('h1.reveal.reveal-delay-1') || document.querySelector('section h1') || document.querySelector('h1');
+    if (h1) {
+      h1.setAttribute('data-default-headline', h1.innerHTML);
+      h1.textContent = decodeURIComponent(hl.replace(/\+/g, ' '));
+    }
+  }
+});
+</script>
+
 </body>
 </html>
