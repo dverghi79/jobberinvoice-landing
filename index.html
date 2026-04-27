@@ -1164,17 +1164,39 @@
     }
 
     // ── Calendly ──
-    function openCalendly() {
+    function openCalendly(e) {
+      if (e) e.preventDefault();
       grantConsent();
-      if (typeof gtag === 'function') {
-        gtag('event', 'conversion', { send_to: 'AW-18071371531/z6DhCLq9-JccEIv-jKlD' });
+      // Google Ads conversion (fires on click intent)
+      try { if (typeof gtag === 'function') gtag('event', 'conversion', { send_to: 'AW-18071371531/z6DhCLq9-JccEIv-jKlD', value: 1.0, currency: 'USD' }); } catch(ex) {}
+      // Vercel Analytics event
+      try { if (window.va) window.va('event', { name: 'calendly-booking', data: { product: 'JobberInvoice' } }); } catch(ex) {}
+      // Open Calendly popup with product-specific UTMs
+      if (window.Calendly) {
+        Calendly.initPopupWidget({ url: 'https://calendly.com/leanaistudio/founder-call?utm_source=jobberinvoice&utm_medium=lp&utm_campaign=founder-call' + '?utm_source=' + encodeURIComponent('JobberInvoice') + '&utm_medium=lp&utm_campaign=founder-call' });
       }
-      fetch('/api/sheet-notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: 'calendly-booking', product: 'JobberInvoice', source: 'calendly', timestamp: new Date().toISOString() }) }).catch(function(){});
-      fetch('/api/resend-notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: 'calendly-booking', product: 'JobberInvoice', source: 'calendly' }) }).catch(function(){});
-      if (typeof Calendly !== 'undefined') {
-        Calendly.initPopupWidget({ url: 'https://calendly.com/leanaistudio/founder-call?utm_source=jobberinvoice&utm_medium=lp&utm_campaign=founder-call' });
-      }
+      return false;
     }
+
+    // Calendly event_scheduled listener: fires when booking is confirmed
+    // Captures real invitee name + email from Calendly widget postMessage
+    window.addEventListener('message', function(ev) {
+      if (!ev.data || ev.data.event !== 'calendly.event_scheduled') return;
+      var payload = ev.data.payload || {};
+      var invitee = payload.invitee || {};
+      var invEmail = invitee.email || 'calendly-booking';
+      var invName = invitee.name || '';
+      var slug = 'JobberInvoice';
+      var displayName = 'JobberInvoice';
+      // Log to Google Sheets (always, even without email)
+      try { fetch('/api/sheet-notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: invEmail, first_name: invName, product: slug, source: 'calendly', submitted_at: new Date().toISOString() }) }); } catch(ex) {}
+      // Log to Resend (only if we got a real email)
+      if (invEmail && invEmail !== 'calendly-booking') {
+        try { fetch('/api/resend-notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: invEmail, first_name: invName, product: slug }) }); } catch(ex) {}
+      }
+      // Log to Slack with proper text field
+      try { fetch('/api/slack-notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: '*[' + displayName + ']* Calendly booking confirmed!\n*Email:* ' + invEmail + '\n*Name:* ' + (invName || 'n/a') + '\n*Source:* LP founder badge' }) }); } catch(ex) {}
+    });
   
     /* ── Aha Morphing Animation ── */
     (function() {
