@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>JobberInvoice — HVAC Billing Automation for Jobber + QuickBooks</title>
-  <meta name="description" content="JobberInvoice syncs every Jobber job to QuickBooks automatically. No double-entry invoicing, no missed line items, no billing delays. Built for 2-8 technician HVAC companies." />
-  <meta property="og:title" content="JobberInvoice — HVAC Billing Automation for Jobber + QuickBooks" />
-  <meta property="og:description" content="JobberInvoice syncs every Jobber job to QuickBooks automatically. No double-entry invoicing, no missed line items, no billing delays. Built for 2-8 technician HVAC companies." />
+  <title>JobberInvoice — Auto-Sync Jobber to QuickBooks</title>
+  <meta name="description" content="Stop retyping invoices. JobberInvoice auto-syncs closed Jobber jobs into QuickBooks invoices in under 2 minutes. Built for field service teams." />
+  <meta property="og:title" content="JobberInvoice — Auto-Sync Jobber to QuickBooks" />
+  <meta property="og:description" content="Stop retyping invoices. JobberInvoice auto-syncs closed Jobber jobs into QuickBooks invoices in under 2 minutes. Built for field service teams." />
   <meta property="og:url" content="https://jobberinvoice.leanaistudio.com" />
   <link rel="canonical" href="https://jobberinvoice.leanaistudio.com" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f97316' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3Cpolyline points='10 9 9 9 8 9'/%3E%3C/svg%3E" />
 
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
 
-  <!-- Microsoft Clarity — consent-gated (matches region-based gtag model) -->
+  <!-- Microsoft Clarity -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -23,7 +23,7 @@
     })(window, document, "clarity", "script", "wibqf3uimd");
   </script>
 
-  <!-- Google Ads gtag — Consent Mode v2 (region-based: EU denied, US/rest granted) -->
+  <!-- Google Ads gtag — region-based consent -->
   <script>
     var gtagLoaded = false;
     function loadGtag() {
@@ -31,7 +31,6 @@
       gtagLoaded = true;
       window.dataLayer = window.dataLayer || [];
       window.gtag = function(){dataLayer.push(arguments);};
-      /* Region-specific consent: EU/EEA = denied (GDPR), rest of world = granted */
       gtag('consent', 'default', {
         ad_storage: 'denied',
         analytics_storage: 'denied',
@@ -63,7 +62,6 @@
       document.head.appendChild(s);
       gtag('js', new Date());
       gtag('config', 'AW-18071371531');
-      gtag('config', 'G-MJGQSSEBQ5');
     }
     function grantConsent() {
       localStorage.setItem('cookie_consent', 'accepted');
@@ -90,10 +88,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <!-- Calendly popup widget -->
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -111,8 +105,8 @@
 
     /* ── Colors ── */
     :root {
-      --accent: #f97316;
-      --accent-glow: rgba(249,115,22,0.15);
+      --cyan: #f97316;
+      --cyan-glow: rgba(249,115,22,0.15);
       --surface: rgba(255,255,255,0.03);
       --surface-hover: rgba(255,255,255,0.06);
       --border: rgba(255,255,255,0.06);
@@ -120,9 +114,6 @@
       --text-primary: #f4f4f5;
       --text-secondary: #a1a1aa;
       --text-muted: #71717a;
-      --green: #22c55e;
-      --red: #ef4444;
-      --amber: #f59e0b;
     }
 
     /* ── Layout ── */
@@ -132,19 +123,37 @@
 
     /* ── Typography ── */
     .badge { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid var(--border); border-radius: 9999px; padding: 0.4rem 0.9rem; color: var(--text-muted); font-size: 0.8rem; font-weight: 500; backdrop-filter: blur(8px); background: var(--surface); }
-    .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse-dot 2s ease-in-out infinite; }
+    .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: pulse-dot 2s ease-in-out infinite; }
     @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.5); } }
-    .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; }
+    .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem; }
     .section-title { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text-primary); max-width: 680px; }
     .section-subtitle { font-size: 1.05rem; color: var(--text-secondary); max-width: 560px; margin-top: 1rem; }
 
-    /* ── Gradient hero bg ── */
+    /* ── Animated gradient text ── */
+    .gradient-text {
+      background: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #f97316 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    @keyframes shimmer { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+    /* ── Hero gradient bg ── */
     .hero-gradient {
       position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
       width: 900px; height: 700px;
       background: radial-gradient(ellipse at center, rgba(249,115,22,0.08) 0%, rgba(249,115,22,0.02) 40%, transparent 70%);
       pointer-events: none; z-index: 0;
     }
+
+    /* ── Floating glow orbs (decorative) ── */
+    .glow-orb {
+      position: absolute; border-radius: 50%; pointer-events: none; filter: blur(80px); opacity: 0.5;
+      animation: float-orb 8s ease-in-out infinite;
+    }
+    @keyframes float-orb { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(20px, -20px); } }
 
     /* ── Glass card ── */
     .glass-card {
@@ -164,7 +173,7 @@
     /* ── Buttons ── */
     .btn-primary {
       display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-      background: var(--accent); color: #08080a; font-weight: 700; font-size: 0.95rem;
+      background: var(--cyan); color: #08080a; font-weight: 700; font-size: 0.95rem;
       border: none; border-radius: 12px; padding: 0.85rem 2rem;
       text-decoration: none; cursor: pointer; font-family: 'Inter', sans-serif;
       transition: all 0.2s; position: relative; overflow: hidden;
@@ -181,39 +190,106 @@
     /* ── Sticky header ── */
     .sticky-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(8,8,10,0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
     .sticky-header .inner { max-width: 1120px; margin: 0 auto; padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
-    .sticky-header .btn-sm { background: var(--accent); color: #08080a; font-weight: 700; border-radius: 10px; padding: 0.45rem 1.25rem; font-size: 0.85rem; text-decoration: none; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+    .sticky-header .btn-sm { background: var(--cyan); color: #08080a; font-weight: 700; border-radius: 10px; padding: 0.45rem 1.25rem; font-size: 0.85rem; text-decoration: none; font-family: 'Inter', sans-serif; transition: all 0.2s; }
     .sticky-header .btn-sm:hover { background: #ea580c; }
+    .sticky-header nav a:not(.btn-sm):hover { color: var(--cyan); }
 
-    /* ── Grid ── */
+    /* ── Mobile hamburger menu ── */
+    .hamburger { display:none;background:none;border:none;cursor:pointer;padding:0.4rem;-webkit-tap-highlight-color:transparent; }
+    .hamburger svg { display:block; }
+    .mobile-nav-overlay { display:none; }
+    @media (max-width: 768px) {
+      .sticky-header nav { display: none !important; }
+      .sticky-header .btn-sm.desktop-cta { display: none !important; }
+      .hamburger { display:block; }
+      .mobile-nav-overlay {
+        display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:999;
+        background:rgba(8,8,10,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+        flex-direction:column;align-items:center;justify-content:center;gap:0;
+      }
+      .mobile-nav-overlay.open { display:flex; }
+      .mobile-nav-overlay a {
+        font-size:1.25rem;font-weight:600;color:var(--text-primary);text-decoration:none;
+        padding:1rem 2rem;width:100%;text-align:center;transition:color 0.2s;
+      }
+      .mobile-nav-overlay a:hover { color:var(--cyan); }
+      .mobile-nav-overlay .mobile-nav-cta {
+        margin-top:1.5rem;background:var(--cyan);color:#08080a;font-weight:700;
+        border-radius:12px;padding:0.85rem 2rem;font-size:1rem;width:auto;
+      }
+      .mobile-nav-close {
+        position:absolute;top:1rem;right:1.5rem;background:none;border:none;
+        cursor:pointer;padding:0.5rem;-webkit-tap-highlight-color:transparent;
+      }
+    }
+
+    /* ── Capabilities Tabs ── */
+    .cap-tab {
+      display:flex;align-items:center;gap:0.75rem;width:100%;padding:0.9rem 1.5rem;
+      border:none;background:transparent;color:var(--text-muted);font-size:0.9rem;
+      font-weight:500;cursor:pointer;transition:all 0.2s;text-align:left;
+      border-left:3px solid transparent;font-family:inherit;
+    }
+    .cap-tab:hover { color:var(--text-primary);background:rgba(255,255,255,0.03); }
+    .cap-tab.active {
+      color:var(--cyan);background:rgba(249,115,22,0.06);
+      border-left-color:var(--cyan);font-weight:600;
+    }
+    .cap-tab svg { flex-shrink:0; }
+    .cap-panel { display:none;animation:fadePanel 0.3s ease; }
+    .cap-panel.active { display:block; }
+    @keyframes fadePanel { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .cap-chip {
+      display:inline-block;padding:0.3rem 0.75rem;border-radius:20px;
+      font-size:0.75rem;font-weight:500;color:var(--cyan);
+      background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.2);
+    }
+    @media (max-width: 768px) {
+      .capabilities-wrap { grid-template-columns:1fr !important; }
+      .capabilities-wrap > div:first-child {
+        border-right:none !important;border-bottom:1px solid var(--border);
+        display:flex;overflow-x:auto;padding:0.75rem !important;gap:0.25rem;
+      }
+      .cap-tab { white-space:nowrap;border-left:none;border-bottom:2px solid transparent;padding:0.6rem 1rem;font-size:0.8rem; }
+      .cap-tab.active { border-left-color:transparent;border-bottom-color:var(--cyan); }
+      .cap-panels-container { padding: 1.25rem !important; min-height: auto !important; }
+      .cap-mockup-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* ── Grids ── */
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
     .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
     @media (max-width: 768px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
 
-    /* ── Stats ── */
-    .stat-number { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text-primary); font-variant-numeric: tabular-nums; }
-    .stat-number .counter { display: inline-block; }
-
-    /* ── Accent section ── */
-    .accent-section {
-      background: linear-gradient(135deg, rgba(249,115,22,0.06) 0%, rgba(249,115,22,0.02) 50%, rgba(8,8,10,1) 100%);
-      border-top: 1px solid rgba(249,115,22,0.1);
-      border-bottom: 1px solid rgba(249,115,22,0.1);
-    }
-
-    /* ── Integration logos ── */
-    .logo-strip { display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap; }
-    .logo-strip span { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: rgba(255,255,255,0.2); letter-spacing: -0.01em; transition: color 0.3s; }
-    .logo-strip span:hover { color: rgba(255,255,255,0.4); }
+    /* ── Hero grid ── */
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; max-width: 1120px; }
+    @media (max-width: 768px) { .hero-grid { grid-template-columns: 1fr; } .hero-image { display: none; } }
 
     /* ── Step indicator ── */
-    .step-num { width: 2.5rem; height: 2.5rem; border-radius: 12px; background: var(--accent-glow); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+    .step-num { width: 2.5rem; height: 2.5rem; border-radius: 12px; background: var(--cyan-glow); display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700; color: var(--cyan); flex-shrink: 0; }
+
+    /* ── Pipeline flow ── */
+    .pipeline-step { display: flex; align-items: center; gap: 0.75rem; }
+    .pipeline-icon { width: 2.75rem; height: 2.75rem; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .pipeline-arrow { flex: 1; display: flex; align-items: center; justify-content: center; padding: 0 0.75rem; }
+    .pipeline-arrow .line { flex: 1; height: 2px; }
+    .pipeline-arrow svg { flex-shrink: 0; margin: 0 -2px; }
+
+    /* ── Founding box (waitlist accent section) ── */
+    .founding-box { border: 1px solid rgba(249,115,22,0.2); border-radius: 16px; padding: 2.5rem; background: rgba(249,115,22,0.03); }
 
     /* ── Tags ── */
-    .tag { display: inline-block; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; font-weight: 500; padding: 0.4rem 0.9rem; border-radius: 9999px; transition: all 0.2s; }
+    .tag { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; font-weight: 500; padding: 0.4rem 0.9rem; border-radius: 9999px; transition: all 0.2s; }
     .tag:hover { border-color: var(--border-hover); color: var(--text-secondary); }
 
-    /* ── Founding box ── */
-    .founding-box { border: 1px solid rgba(249,115,22,0.2); background: rgba(249,115,22,0.03); border-radius: 16px; padding: 2.5rem; }
+    /* ── Separator ── */
+    .sep { width: 100%; height: 1px; background: var(--border); }
+
+    /* ── Form inputs ── */
+    input, select, textarea { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text-primary); outline: none; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 0.95rem; padding: 0.65rem 1rem; transition: all 0.2s; }
+    input:focus, select:focus, textarea:focus { border-color: rgba(249,115,22,0.4); box-shadow: 0 0 0 3px rgba(249,115,22,0.1); }
+    ::placeholder { color: var(--text-muted); }
+    select option { background: #18181b; }
 
     /* ── Mobile helpers ── */
     .hide-mobile { }
@@ -222,107 +298,54 @@
       .btn-primary { width: 100%; justify-content: center; }
       input, select, textarea { width: 100% !important; min-height: 48px !important; font-size: 16px !important; }
       button[type="submit"] { min-height: 48px !important; }
+      .mobile-hide-img { display: none !important; }
     }
     .show-mobile-only { display: none !important; }
     @media (max-width: 768px) { .show-mobile-only { display: block !important; } }
-
-    /* ── Form inputs ── */
-    input, select, textarea { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text-primary); outline: none; border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 0.95rem; transition: all 0.2s; }
-    input:focus, select:focus, textarea:focus { border-color: rgba(249,115,22,0.4); box-shadow: 0 0 0 3px rgba(249,115,22,0.1); }
-    ::placeholder { color: var(--text-muted); }
-    select option { background: #18181b; }
-
-    /* ── Floating glow orbs ── */
-    .glow-orb {
-      position: absolute; border-radius: 50%; pointer-events: none; filter: blur(80px); opacity: 0.5;
-      animation: float-orb 8s ease-in-out infinite;
-    }
-    @keyframes float-orb { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(20px, -20px); } }
-
-    /* ── Animated gradient text ── */
-    .gradient-text {
-      background: linear-gradient(135deg, var(--accent) 0%, #fbbf24 50%, var(--accent) 100%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 3s ease-in-out infinite;
-    }
-    @keyframes shimmer { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-
-    /* ── Hero grid ── */
-    .hero-grid { display: grid; grid-template-columns: 1fr 380px; gap: 3rem; align-items: center; }
-    @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr !important; } }
-
-    /* ── Founder booking badge ── */
-    .founder-booking-badge{ position:fixed; bottom:24px; right:24px; z-index:9999; display:flex; align-items:center; gap:8px; padding:12px 20px; background:rgba(17,17,19,0.9); color:#fff; border:1px solid var(--border); border-radius:14px; cursor:pointer; font-family:inherit; font-size:14px; font-weight:600; box-shadow:0 8px 32px rgba(0,0,0,0.4); transition:all 0.3s; text-decoration:none; backdrop-filter:blur(12px); }
-    .founder-booking-badge:hover{ transform:translateY(-2px); box-shadow:0 12px 40px rgba(0,0,0,0.5); border-color:rgba(249,115,22,0.2); color:#fff; }
-    .founder-booking-badge svg{ width:18px; height:18px; flex-shrink:0; }
-  
-    /* ── Aha Morphing Animation ── */
-    .aha-wrap{max-width:900px;margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,0.5);background:#111113;}
-    .aha-chrome{background:#161618;padding:0.6rem 1rem;display:flex;align-items:center;gap:0.75rem;border-bottom:1px solid var(--border);}
-    .aha-dots span{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px;}
-    .aha-status{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:600;padding:0.3rem 0.75rem;border-radius:8px;transition:all 0.6s ease;}
-    .aha-status.pain{background:rgba(239,68,68,0.12);color:#ef4444;}
-    .aha-status.syncing{background:rgba(168,85,247,0.12);color:#a855f7;}
-    .aha-status.done{background:rgba(34,197,94,0.12);color:#22c55e;}
-    .aha-body{padding:1.5rem 1.5rem 1rem;position:relative;}
-    .aha-caption{text-align:center;padding:0.75rem 0 1rem;font-size:1.1rem;font-weight:700;transition:all 0.5s ease;min-height:2.5rem;}
-    .aha-form{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;transition:all 0.8s ease;}
-    .aha-field{padding:0.6rem 0.75rem;border-radius:8px;font-size:0.75rem;font-family:'JetBrains Mono',monospace;transition:all 0.8s ease;position:relative;overflow:hidden;}
-    .aha-field-label{font-size:0.55rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.3rem;transition:color 0.6s ease;}
-    .aha-field-value{font-size:0.8rem;font-weight:500;transition:color 0.6s ease;}
-    .aha-field.full{grid-column:1/-1;}
-    .aha-form.state-pain .aha-field{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);}
-    .aha-form.state-pain .aha-field-label{color:rgba(239,68,68,0.6);}
-    .aha-form.state-pain .aha-field-value{color:var(--text-muted);}
-    .aha-form.state-pain .aha-field.has-error{border-color:#ef4444;box-shadow:0 0 0 1px rgba(239,68,68,0.3);}
-    .aha-form.state-pain .aha-field.has-error .aha-field-value{color:#ef4444;text-decoration:line-through;}
-    .aha-form.state-syncing .aha-field{background:rgba(168,85,247,0.05);border:1px solid rgba(168,85,247,0.15);}
-    .aha-form.state-syncing .aha-field-label{color:rgba(168,85,247,0.6);}
-    .aha-form.state-syncing .aha-field-value{color:#a855f7;}
-    .aha-form.state-done .aha-field{background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.18);}
-    .aha-form.state-done .aha-field-label{color:rgba(34,197,94,0.6);}
-    .aha-form.state-done .aha-field-value{color:var(--text-primary);}
-    .aha-form.state-done .aha-field.has-error{border-color:rgba(34,197,94,0.18);box-shadow:none;}
-    .aha-form.state-done .aha-field.has-error .aha-field-value{color:var(--text-primary);text-decoration:none;}
-    .aha-scan{height:2px;background:transparent;margin:0.75rem 0 0;border-radius:2px;overflow:hidden;position:relative;}
-    .aha-scan-bar{position:absolute;top:0;left:0;width:0;height:100%;border-radius:2px;transition:width 1.2s ease-in-out;}
-    .aha-timer-strip{display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-top:0.75rem;padding:0.5rem 0;font-family:'JetBrains Mono',monospace;font-size:0.75rem;transition:all 0.5s ease;min-height:2rem;}
-    @media (max-width:600px){.aha-form{grid-template-columns:1fr;}}
-
-    /* ── Logical Closer ── */
-    .closer-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:900px;margin:0 auto;}
-    .closer-card{border-radius:16px;padding:2rem 1.75rem;}
-    .closer-card-old{background:rgba(239,68,68,0.03);border:1px solid rgba(239,68,68,0.12);}
-    .closer-card-new{background:rgba(34,197,94,0.03);border:1px solid rgba(34,197,94,0.15);}
-    .closer-label{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;font-family:'JetBrains Mono',monospace;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.5rem;}
-    .closer-item{display:flex;align-items:flex-start;gap:0.75rem;margin-bottom:1.15rem;}
-    .closer-item:last-child{margin-bottom:0;}
-    .closer-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
-    .closer-icon-x{background:rgba(239,68,68,0.1);}
-    .closer-icon-check{background:rgba(34,197,94,0.1);}
-    @media (max-width:700px){.closer-grid{grid-template-columns:1fr;}}
-
   </style>
 </head>
 <body>
 
-  <!-- STICKY HEADER -->
+  <!-- ═══════════════════════════════════════════
+       STICKY HEADER
+       ═══════════════════════════════════════════ -->
   <header class="sticky-header">
     <div class="inner">
       <div style="display:flex;align-items:center;gap:0.6rem;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/></svg>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
         <span style="font-weight:800;font-size:1.2rem;color:var(--text-primary);letter-spacing:-0.02em;">JobberInvoice</span>
       </div>
-      <a href="#waitlist" class="btn-sm">Join the waitlist</a>
+      <nav style="display:flex;align-items:center;gap:1.8rem;">
+        <a href="#product" style="font-size:0.95rem;font-weight:500;color:var(--text-primary);text-decoration:none;transition:color 0.2s;">Product</a>
+        <a href="#the-problem" style="font-size:0.95rem;font-weight:500;color:var(--text-primary);text-decoration:none;transition:color 0.2s;">Problem</a>
+        <a href="#how-it-works" style="font-size:0.95rem;font-weight:500;color:var(--text-primary);text-decoration:none;transition:color 0.2s;">How It Works</a>
+        <a href="#built-for" style="font-size:0.95rem;font-weight:500;color:var(--text-primary);text-decoration:none;transition:color 0.2s;">Built For</a>
+      </nav>
+      <a href="#waitlist" class="btn-sm desktop-cta">Join the waitlist</a>
+      <button class="hamburger" onclick="document.getElementById('mobile-nav').classList.add('open')" aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
   </header>
+
+  <!-- Mobile nav overlay -->
+  <div class="mobile-nav-overlay" id="mobile-nav">
+    <button class="mobile-nav-close" onclick="document.getElementById('mobile-nav').classList.remove('open')" aria-label="Close menu">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <a href="#product" onclick="document.getElementById('mobile-nav').classList.remove('open')">Product</a>
+    <a href="#the-problem" onclick="document.getElementById('mobile-nav').classList.remove('open')">Problem</a>
+    <a href="#how-it-works" onclick="document.getElementById('mobile-nav').classList.remove('open')">How It Works</a>
+    <a href="#built-for" onclick="document.getElementById('mobile-nav').classList.remove('open')">Built For</a>
+    <a href="#waitlist" class="mobile-nav-cta" onclick="document.getElementById('mobile-nav').classList.remove('open')">Join the waitlist</a>
+  </div>
+
   <div style="height:3.25rem;"></div>
 
   <!-- ═══════════════════════════════════════════
-       HERO
+       HERO — 2-column grid: copy left, image right
        ═══════════════════════════════════════════ -->
   <section style="padding:5rem 0 4rem;position:relative;overflow:hidden;">
     <div class="hero-gradient"></div>
@@ -334,944 +357,690 @@
         <!-- Left: Copy -->
         <div>
           <div class="reveal" style="margin-bottom:1.5rem;">
-            <div class="badge"><span class="dot"></span> Early Access — Field Service Companies</div>
+            <div class="badge"><span class="dot"></span> Now accepting early access</div>
           </div>
 
-          <h1 class="reveal reveal-delay-1" style="font-size:clamp(2rem,4.5vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:1rem;color:var(--text-primary);">
-            Your techs close jobs in Jobber. Your <span class="gradient-text">invoices should write themselves.</span>
+          <h1 id="hero-headline" class="reveal reveal-delay-1" style="font-size:clamp(2.25rem,4.5vw,3.25rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:1.5rem;color:var(--text-primary);">
+            Stop Retyping Invoices. <span class="gradient-text">Auto-Sync Jobber to QuickBooks.</span>
           </h1>
-
-          <p class="reveal reveal-delay-1" style="font-size:1.05rem;color:var(--text-secondary);margin-bottom:2rem;max-width:540px;">
-            HVAC billing software that syncs every Jobber job to QuickBooks automatically — no double entry, no missed line items, no billing delays.
-          </p>
 
           <div class="reveal reveal-delay-2" style="display:flex;flex-direction:column;gap:0.65rem;margin-bottom:2.5rem;max-width:600px;">
             <div style="display:flex;align-items:center;gap:0.75rem;font-size:1.05rem;color:var(--text-secondary);">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Every closed job auto-invoiced in QuickBooks
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Closed jobs become QuickBooks invoices automatically
             </div>
             <div style="display:flex;align-items:center;gap:0.75rem;font-size:1.05rem;color:var(--text-secondary);">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Labor, parts, and tax codes mapped correctly
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Line items, taxes, and customer data mapped correctly
             </div>
             <div style="display:flex;align-items:center;gap:0.75rem;font-size:1.05rem;color:var(--text-secondary);">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Cash flow gaps from delayed billing eliminated
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              No more end-of-day data entry for the office manager
             </div>
           </div>
 
           <div class="reveal reveal-delay-3" style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
             <a href="#waitlist" class="btn-primary">
-              Stop Typing Invoices Twice
+              Join the waitlist for early access
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
-            <a href="#how-it-works" class="btn-ghost">See how it works ↓</a>
+            <a href="#how-it-works" class="btn-ghost">See how it works &#8595;</a>
           </div>
         </div>
 
-        <!-- Right: Phone mockup -->
-        <div class="reveal-scale reveal-delay-2 hide-mobile" style="display:flex;justify-content:center;">
-          <div style="position:relative;">
-            <div style="width:260px;border-radius:32px;border:3px solid rgba(255,255,255,0.08);background:#111113;box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.04);overflow:hidden;">
-              <!-- Status bar -->
-              <div style="padding:0.6rem 1.25rem 0.35rem;display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:0.55rem;font-weight:600;color:var(--text-primary);">9:41</span>
-                <div style="display:flex;gap:0.3rem;align-items:center;">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--text-primary)"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.24 4.24 0 0 0-6 0zm-4-4l2 2a7.07 7.07 0 0 1 10 0l2-2C15.68 9.68 8.32 9.68 5 13z"/></svg>
-                  <svg width="14" height="10" viewBox="0 0 24 14" fill="var(--text-primary)"><rect x="0" y="2" width="20" height="10" rx="2" stroke="var(--text-primary)" stroke-width="1.5" fill="none"/><rect x="2" y="4" width="14" height="6" rx="1" fill="var(--text-primary)"/><rect x="21" y="5" width="2" height="4" rx="0.5" fill="var(--text-primary)" opacity="0.4"/></svg>
-                </div>
-              </div>
-              <!-- App header -->
-              <div style="padding:0.5rem 1rem 0.75rem;display:flex;align-items:center;justify-content:space-between;">
-                <div style="display:flex;align-items:center;gap:0.4rem;">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/></svg>
-                  <span style="font-weight:800;font-size:0.75rem;color:var(--text-primary);">JobberInvoice</span>
-                </div>
-                <div style="width:24px;height:24px;border-radius:50%;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;">
-                  <span style="font-size:0.45rem;font-weight:700;color:var(--accent);">JI</span>
-                </div>
-              </div>
-              <!-- Phone content: Recent Jobs -->
-              <div style="padding:0 0.75rem 0.5rem;">
-                <div style="background:rgba(249,115,22,0.06);border:1px solid rgba(249,115,22,0.12);border-radius:10px;padding:0.6rem 0.75rem;margin-bottom:0.5rem;">
-                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem;">
-                    <span style="font-size:0.6rem;font-weight:700;color:var(--text-primary);">AC Install — Johnson</span>
-                    <span style="font-size:0.45rem;padding:0.15rem 0.4rem;background:rgba(34,197,94,0.15);color:#22c55e;border-radius:9999px;font-weight:600;">Synced</span>
-                  </div>
-                  <p style="font-size:0.45rem;color:var(--text-muted);margin:0;">$2,850 — 4.5 hrs labor, equipment + install</p>
-                  <div style="display:flex;gap:0.3rem;margin-top:0.3rem;">
-                    <div style="flex:1;height:3px;border-radius:2px;background:#22c55e;"></div>
-                    <div style="flex:1;height:3px;border-radius:2px;background:#22c55e;"></div>
-                    <div style="flex:1;height:3px;border-radius:2px;background:#22c55e;"></div>
-                    <div style="flex:1;height:3px;border-radius:2px;background:#22c55e;"></div>
-                  </div>
-                </div>
-                <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.6rem 0.75rem;margin-bottom:0.5rem;">
-                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem;">
-                    <span style="font-size:0.6rem;font-weight:700;color:var(--text-primary);">Furnace Repair — Williams</span>
-                    <span style="font-size:0.45rem;padding:0.15rem 0.4rem;background:rgba(34,197,94,0.15);color:#22c55e;border-radius:9999px;font-weight:600;">Synced</span>
-                  </div>
-                  <p style="font-size:0.45rem;color:var(--text-muted);margin:0;">$1,200 — 2 hrs labor, parts + labor</p>
-                  <div style="display:flex;gap:0.3rem;margin-top:0.3rem;">
-                    <div style="flex:1;height:3px;border-radius:2px;background:#22c55e;"></div>
-                    <div style="flex:1;height:3px;border-radius:2px;background:#22c55e;"></div>
-                    <div style="flex:1;height:3px;border-radius:2px;background:#22c55e;"></div>
-                  </div>
-                </div>
-                <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.6rem 0.75rem;margin-bottom:0.5rem;">
-                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem;">
-                    <span style="font-size:0.6rem;font-weight:700;color:var(--text-primary);">Duct Cleaning — Garcia</span>
-                    <span style="font-size:0.45rem;padding:0.15rem 0.4rem;background:rgba(34,197,94,0.15);color:#22c55e;border-radius:9999px;font-weight:600;">Synced</span>
-                  </div>
-                  <p style="font-size:0.45rem;color:var(--text-muted);margin:0;">$650 — 2.5 hrs labor, duct service</p>
-                  <div style="display:flex;gap:0.3rem;margin-top:0.3rem;">
-                    <div style="flex:1;height:3px;border-radius:2px;background:#22c55e;"></div>
-                    <div style="flex:1;height:3px;border-radius:2px;background:#22c55e;"></div>
-                    <div style="flex:1;height:3px;border-radius:2px;background:#22c55e;"></div>
-                  </div>
-                </div>
-                <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.6rem 0.75rem;">
-                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem;">
-                    <span style="font-size:0.6rem;font-weight:700;color:var(--text-primary);">Heat Pump Service — Chen</span>
-                    <span style="font-size:0.45rem;padding:0.15rem 0.4rem;background:rgba(34,197,94,0.15);color:#22c55e;border-radius:9999px;font-weight:600;">Synced</span>
-                  </div>
-                  <p style="font-size:0.45rem;color:var(--text-muted);margin:0;">$1,450 — 3 hrs labor, inspection + service</p>
-                </div>
-              </div>
-              <!-- Bottom nav -->
-              <div style="display:flex;justify-content:space-around;padding:0.6rem 0.75rem;border-top:1px solid var(--border);margin-top:0.5rem;">
-                <div style="display:flex;flex-direction:column;align-items:center;gap:0.15rem;">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.75"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                  <span style="font-size:0.4rem;color:var(--accent);font-weight:600;">Dashboard</span>
-                </div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:0.15rem;">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                  <span style="font-size:0.4rem;color:var(--text-muted);">Jobs</span>
-                </div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:0.15rem;">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.75"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-                  <span style="font-size:0.4rem;color:var(--text-muted);">Invoices</span>
-                </div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:0.15rem;">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.75"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                  <span style="font-size:0.4rem;color:var(--text-muted);">Settings</span>
-                </div>
-              </div>
-            </div>
-            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:400px;background:radial-gradient(ellipse,rgba(249,115,22,0.08),transparent 70%);pointer-events:none;z-index:-1;"></div>
+        <!-- Right: Hero image placeholder -->
+        <div class="hero-image reveal reveal-delay-2" style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;min-height:360px;">
+          <div style="text-align:center;padding:2rem;">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.4;">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin-top:1rem;">Product preview coming soon</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- AHA MOMENT — Live UI Morphing Animation -->
-  <section id="aha-section" style="padding:2rem 0 4rem;">
+
+  <!-- ═══════════════════════════════════════════
+       CAPABILITIES — Vertical tabbed feature showcase
+       ═══════════════════════════════════════════ -->
+  <section id="product" style="padding:4rem 0 5rem;">
     <div class="container">
-      <p class="section-label reveal">See it in action</p>
-      <h2 class="section-title reveal" style="margin-bottom:2rem;">
-        From <span class="gradient-text">manual invoicing</span> to done in seconds.
+      <p class="section-label reveal">Capabilities</p>
+      <h2 class="section-title reveal" style="max-width:700px;margin:0 auto 3rem;">
+        Everything you need to <span class="gradient-text">close the Jobber-to-QB gap.</span>
       </h2>
-      <div class="aha-wrap reveal-scale">
-        <div class="aha-chrome">
-          <div class="aha-dots">
-            <span style="background:#ef4444;"></span>
-            <span style="background:#eab308;"></span>
-            <span style="background:#22c55e;"></span>
-          </div>
-          <div id="aha-status" class="aha-status pain">Manual Entry</div>
-        </div>
-        <div class="aha-body">
-          <div id="aha-caption" class="aha-caption" style="color:#ef4444;">Re-typing completed job details into invoice template...</div>
-          <div id="aha-form" class="aha-form state-pain">
-            <div class="aha-field has-error">
-              <div class="aha-field-label">Customer</div>
-              <div class="aha-field-value" data-pain="Johnson... or Johnston?" data-done="Mike Johnston — 42 Oak Lane">Johnson... or Johnston?</div>
-            </div>
-            <div class="aha-field">
-              <div class="aha-field-label">Job Type</div>
-              <div class="aha-field-value" data-pain="AC repair... or maintenance?" data-done="AC Repair — Emergency Call">AC repair... or maintenance?</div>
-            </div>
-            <div class="aha-field">
-              <div class="aha-field-label">Tech Assigned</div>
-              <div class="aha-field-value" data-pain="(checking dispatch board)" data-done="Carlos R. — Senior Tech">(checking dispatch board)</div>
-            </div>
-            <div class="aha-field has-error">
-              <div class="aha-field-label">Parts Used</div>
-              <div class="aha-field-value" data-pain="(reading tech's handwriting...)" data-done="Capacitor 45/5 MFD + Contactor 2P 40A">(reading tech's handwriting...)</div>
-            </div>
-            <div class="aha-field full">
-              <div class="aha-field-label">Labor Hours</div>
-              <div class="aha-field-value" data-pain="2.5h? Tech says 3h..." data-done="2.75 hrs @ $125/hr = $343.75">2.5h? Tech says 3h...</div>
-            </div>
-            <div class="aha-field full">
-              <div class="aha-field-label">Parts Cost</div>
-              <div class="aha-field-value" data-pain="(looking up prices...)" data-done="$87.50 — matched to supplier invoice">(looking up prices...)</div>
-            </div>
-            <div class="aha-field full">
-              <div class="aha-field-label">Total</div>
-              <div class="aha-field-value" data-pain="$... (calculator...)" data-done="$431.25 + tax = $466.82">$... (calculator...)</div>
-            </div>
-            <div class="aha-field full">
-              <div class="aha-field-label">Payment Status</div>
-              <div class="aha-field-value" data-pain="(check QuickBooks later)" data-done="Invoice #4521 sent — payment link included">(check QuickBooks later)</div>
-            </div>
-          </div>
-          <div class="aha-scan"><div id="aha-scan-bar" class="aha-scan-bar"></div></div>
-          <div id="aha-timer" class="aha-timer-strip" style="color:#ef4444;">
-            <span id="aha-timer-text">~8 minutes per invoice</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- LOGICAL CLOSER — Old Way vs. New Way -->
-  <section style="padding:4rem 0 5rem;">
-    <div class="container">
-      <p class="section-label reveal">Why switch</p>
-      <h2 class="section-title reveal" style="margin-bottom:2.5rem;">
-        The old way vs. <span class="gradient-text">the JobberInvoice way.</span>
-      </h2>
-      <div class="closer-grid">
-        <div class="closer-card closer-card-old reveal reveal-delay-1">
-          <div class="closer-label" style="color:#ef4444;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            The Old Way
-          </div>
-          <div class="closer-item">
-            <div class="closer-icon closer-icon-x">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </div>
-            <div>
-              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Double-entry into QuickBooks</p>
-              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Techs close jobs in Jobber, then someone re-types parts, labor, and totals into QuickBooks. Every. Single. Job.</p>
-            </div>
-          </div>
-          <div class="closer-item">
-            <div class="closer-icon closer-icon-x">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </div>
-            <div>
-              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Invoices lag days behind jobs</p>
-              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Office staff batches invoices weekly. Customers forget the work by the time they get the bill — and pay slower.</p>
-            </div>
-          </div>
-          <div class="closer-item">
-            <div class="closer-icon closer-icon-x">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </div>
-            <div>
-              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Line items don't match</p>
-              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Jobber has one description, QuickBooks has another. Tax time becomes a reconciliation nightmare.</p>
-            </div>
-          </div>
-          <div class="closer-item">
-            <div class="closer-icon closer-icon-x">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </div>
-            <div>
-              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">No real-time cash visibility</p>
-              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Revenue in Jobber never matches QuickBooks. You're guessing at cash flow until month-end.</p>
-            </div>
-          </div>
-        </div>
-        <div class="closer-card closer-card-new reveal reveal-delay-2">
-          <div class="closer-label" style="color:#22c55e;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            With JobberInvoice
-          </div>
-          <div class="closer-item">
-            <div class="closer-icon closer-icon-check">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Auto-sync from Jobber to QuickBooks</p>
-              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Job closes in Jobber, invoice appears in QuickBooks. Parts, labor, taxes — all mapped automatically.</p>
-            </div>
-          </div>
-          <div class="closer-item">
-            <div class="closer-icon closer-icon-check">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Same-day invoicing</p>
-              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Customers get invoiced the day the job is done. Faster billing, faster payments.</p>
-            </div>
-          </div>
-          <div class="closer-item">
-            <div class="closer-icon closer-icon-check">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Matched line items, always</p>
-              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Jobber descriptions map to QuickBooks items and accounts. Reconciliation takes minutes, not hours.</p>
-            </div>
-          </div>
-          <div class="closer-item">
-            <div class="closer-icon closer-icon-check">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <p style="margin:0;font-size:0.9rem;font-weight:600;color:var(--text-primary);">Real-time revenue dashboard</p>
-              <p style="margin:0.25rem 0 0;font-size:0.8rem;color:var(--text-muted);">Know exactly what's billed, what's paid, and what's outstanding — updated every sync cycle.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-  <!-- ═══════════════════════════════════════════
-       FOUNDER CREDIBILITY
-       ═══════════════════════════════════════════ -->
-  <section style="padding:2rem 0 1rem;">
-    <div class="container reveal">
-      <div style="display:flex;align-items:center;gap:1.25rem;max-width:640px;">
-        <img src="https://leanaistudio.com/founder.jpeg" alt="Dario Verghi" style="width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(249,115,22,0.2);" />
-        <div>
-          <p style="margin:0 0 0.25rem;font-size:0.95rem;font-weight:700;color:var(--text-primary);">Dario Verghi</p>
-          <p style="margin:0 0 0.4rem;font-size:0.8rem;color:var(--text-muted);">Former ops consultant who watched field service companies lose 30+ hours per week on billing chaos</p>
-          <p style="margin:0;font-size:0.875rem;color:var(--text-secondary);line-height:1.6;">"I saw HVAC techs closing jobs in Jobber, then office staff manually re-entering everything into QuickBooks. One missing line item, one wrong tax code, and suddenly cash flow is delayed. I built JobberInvoice so billing happens the moment a job is closed."</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       WORKS WITH
-       ═══════════════════════════════════════════ -->
-  <section style="padding:2rem 0 3rem;">
-    <div class="container reveal">
-      <p style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1.25rem;">Works with</p>
-      <div class="logo-strip">
-        <span>Jobber</span>
-        <span>QuickBooks Online</span>
-        <span>QuickBooks Desktop</span>
-        <span>ServiceTitan</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       KEY METRICS
-       ═══════════════════════════════════════════ -->
-  <section style="padding:2rem 0 4rem;">
-    <div class="container">
-      <div class="grid-3" style="gap:1.25rem;">
-        <div class="glass-card reveal reveal-delay-1" style="text-align:center;padding:2rem 1.5rem;">
-          <div style="width:3.25rem;height:3.25rem;border-radius:14px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6m0 0v6m0-6h6m0 0h6M6 12h6m0 0H6"/></svg>
-          </div>
-          <div class="stat-number" style="margin-bottom:0.4rem;"><span class="counter" data-target="34" data-suffix="">0</span></div>
-          <p style="font-size:0.9rem;color:var(--text-muted);margin:0;">Jobs closed per typical HVAC crew per week</p>
-        </div>
-        <div class="glass-card reveal reveal-delay-2" style="text-align:center;padding:2rem 1.5rem;">
-          <div style="width:3.25rem;height:3.25rem;border-radius:14px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <div class="stat-number" style="margin-bottom:0.4rem;"><span class="counter" data-target="7" data-suffix="-14 days">0</span></div>
-          <p style="font-size:0.9rem;color:var(--text-muted);margin:0;">Typical delay from job close to invoice in QB (without sync)</p>
-        </div>
-        <div class="glass-card reveal reveal-delay-3" style="text-align:center;padding:2rem 1.5rem;">
-          <div style="width:3.25rem;height:3.25rem;border-radius:14px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div class="stat-number" style="margin-bottom:0.4rem;"><span class="counter" data-target="2" data-suffix=" min">0</span></div>
-          <p style="font-size:0.9rem;color:var(--text-muted);margin:0;">Time to sync a closed job to QB invoice with JobberInvoice</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       PRODUCT PREVIEW / DASHBOARD MOCKUP
-       ═══════════════════════════════════════════ -->
-  <section style="padding:3rem 0 5rem;">
-    <div class="container">
-      <p class="section-label reveal">Product Preview</p>
-      <div class="reveal-scale" style="position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,0.5);background:#111113;">
-        <!-- Callout overlays -->
-        <div class="hide-mobile" style="position:absolute;top:90px;right:40px;z-index:10;background:var(--accent);color:#08080a;font-size:0.65rem;font-weight:700;padding:0.3rem 0.75rem;border-radius:8px;box-shadow:0 4px 12px rgba(249,115,22,0.3);">Every job synced automatically</div>
-        <div class="hide-mobile" style="position:absolute;top:200px;left:200px;z-index:10;background:var(--accent);color:#08080a;font-size:0.65rem;font-weight:700;padding:0.3rem 0.75rem;border-radius:8px;box-shadow:0 4px 12px rgba(249,115,22,0.3);">Line items + taxes auto-mapped</div>
-        <div class="hide-mobile" style="position:absolute;bottom:80px;right:80px;z-index:10;background:var(--accent);color:#08080a;font-size:0.65rem;font-weight:700;padding:0.3rem 0.75rem;border-radius:8px;box-shadow:0 4px 12px rgba(249,115,22,0.3);">Zero sync errors</div>
-
-        <!-- Browser chrome -->
-        <div style="background:#161618;padding:0.65rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);">
-          <div style="display:flex;align-items:center;gap:0.75rem;">
-            <div style="display:flex;gap:0.3rem;">
-              <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
-              <div style="width:8px;height:8px;border-radius:50%;background:#ffbd2e;"></div>
-              <div style="width:8px;height:8px;border-radius:50%;background:#28c840;"></div>
-            </div>
-            <span style="font-weight:800;font-size:0.65rem;color:var(--accent);">JobberInvoice</span>
-          </div>
-          <span style="font-size:0.5rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;">app.jobberinvoice.leanaistudio.com</span>
-        </div>
-        <!-- Dashboard body -->
-        <div style="display:flex;min-height:380px;">
-          <!-- Sidebar -->
-          <div style="width:150px;flex-shrink:0;background:#0e0e10;border-right:1px solid var(--border);padding:1rem 0.6rem;" class="hide-mobile">
-            <div style="padding:0.45rem 0.65rem;border-radius:10px;font-size:0.55rem;color:var(--accent);font-weight:600;background:var(--accent-glow);display:flex;align-items:center;gap:0.45rem;margin-bottom:0.35rem;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              Dashboard
-            </div>
-            <div style="padding:0.45rem 0.65rem;font-size:0.55rem;color:var(--text-muted);display:flex;align-items:center;gap:0.45rem;margin-bottom:0.35rem;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              Jobs
-            </div>
-            <div style="padding:0.45rem 0.65rem;font-size:0.55rem;color:var(--text-muted);display:flex;align-items:center;gap:0.45rem;margin-bottom:0.35rem;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-              Invoices
-            </div>
-            <div style="padding:0.45rem 0.65rem;font-size:0.55rem;color:var(--text-muted);display:flex;align-items:center;gap:0.45rem;margin-bottom:0.35rem;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Sync Status
-            </div>
-            <div style="padding:0.45rem 0.65rem;font-size:0.55rem;color:var(--text-muted);display:flex;align-items:center;gap:0.45rem;margin-bottom:0.35rem;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-              Integrations
-            </div>
-            <div style="padding:0.45rem 0.65rem;font-size:0.55rem;color:var(--text-muted);display:flex;align-items:center;gap:0.45rem;">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2"/></svg>
-              Settings
-            </div>
-          </div>
-          <!-- Main content -->
-          <div style="flex:1;padding:1.1rem 1.25rem;background:#111113;">
-            <!-- KPI grid -->
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.55rem;margin-bottom:1rem;">
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.65rem 0.75rem;">
-                <p style="margin:0;font-size:0.4rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);font-weight:600;">Jobs This Week</p>
-                <p style="margin:0.2rem 0 0;font-size:1.2rem;font-weight:800;color:var(--text-primary);">34</p>
-                <p style="margin:0.15rem 0 0;font-size:0.4rem;color:#22c55e;">All closed</p>
-              </div>
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.65rem 0.75rem;">
-                <p style="margin:0;font-size:0.4rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);font-weight:600;">Auto-Invoiced</p>
-                <p style="margin:0.2rem 0 0;font-size:1.2rem;font-weight:800;color:var(--text-primary);">31</p>
-                <p style="margin:0.15rem 0 0;font-size:0.4rem;color:#22c55e;">In QB</p>
-              </div>
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.65rem 0.75rem;">
-                <p style="margin:0;font-size:0.4rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);font-weight:600;">Sync Errors</p>
-                <p style="margin:0.2rem 0 0;font-size:1.2rem;font-weight:800;color:var(--text-primary);">0</p>
-                <p style="margin:0.15rem 0 0;font-size:0.4rem;color:#22c55e;">No issues</p>
-              </div>
-              <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.65rem 0.75rem;">
-                <p style="margin:0;font-size:0.4rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);font-weight:600;">Avg Time to Invoice</p>
-                <p style="margin:0.2rem 0 0;font-size:1.2rem;font-weight:800;color:var(--text-primary);">2</p>
-                <p style="margin:0.15rem 0 0;font-size:0.4rem;color:#22c55e;">min</p>
-              </div>
-            </div>
-            <!-- Job table -->
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
-              <div style="padding:0.6rem 0.75rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;">
-                <span style="font-size:0.5rem;font-weight:700;color:var(--text-primary);">Recent Jobs</span>
-                <span style="font-size:0.4rem;color:var(--accent);font-weight:600;">View all</span>
-              </div>
-              <table style="width:100%;border-collapse:collapse;">
-                <tr style="border-bottom:1px solid var(--border);">
-                  <td style="padding:0.5rem 0.75rem;font-size:0.45rem;color:var(--text-primary);font-weight:600;">AC Install — Johnson</td>
-                  <td style="padding:0.5rem 0.4rem;font-size:0.45rem;color:var(--text-secondary);">$2,850</td>
-                  <td style="padding:0.5rem 0.4rem;font-size:0.45rem;color:var(--text-muted);">Today</td>
-                  <td style="padding:0.5rem 0.75rem;text-align:right;"><span style="font-size:0.4rem;padding:0.15rem 0.5rem;background:rgba(34,197,94,0.15);color:#22c55e;border-radius:9999px;font-weight:600;">Synced</span></td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--border);">
-                  <td style="padding:0.5rem 0.75rem;font-size:0.45rem;color:var(--text-primary);font-weight:600;">Furnace Repair — Williams</td>
-                  <td style="padding:0.5rem 0.4rem;font-size:0.45rem;color:var(--text-secondary);">$1,200</td>
-                  <td style="padding:0.5rem 0.4rem;font-size:0.45rem;color:var(--text-muted);">Yesterday</td>
-                  <td style="padding:0.5rem 0.75rem;text-align:right;"><span style="font-size:0.4rem;padding:0.15rem 0.5rem;background:rgba(34,197,94,0.15);color:#22c55e;border-radius:9999px;font-weight:600;">Synced</span></td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--border);">
-                  <td style="padding:0.5rem 0.75rem;font-size:0.45rem;color:var(--text-primary);font-weight:600;">Duct Cleaning — Garcia</td>
-                  <td style="padding:0.5rem 0.4rem;font-size:0.45rem;color:var(--text-secondary);">$650</td>
-                  <td style="padding:0.5rem 0.4rem;font-size:0.45rem;color:var(--text-muted);">2 days ago</td>
-                  <td style="padding:0.5rem 0.75rem;text-align:right;"><span style="font-size:0.4rem;padding:0.15rem 0.5rem;background:rgba(34,197,94,0.15);color:#22c55e;border-radius:9999px;font-weight:600;">Synced</span></td>
-                </tr>
-                <tr>
-                  <td style="padding:0.5rem 0.75rem;font-size:0.45rem;color:var(--text-primary);font-weight:600;">Heat Pump Service — Chen</td>
-                  <td style="padding:0.5rem 0.4rem;font-size:0.45rem;color:var(--text-secondary);">$1,450</td>
-                  <td style="padding:0.5rem 0.4rem;font-size:0.45rem;color:var(--text-muted);">3 days ago</td>
-                  <td style="padding:0.5rem 0.75rem;text-align:right;"><span style="font-size:0.4rem;padding:0.15rem 0.5rem;background:rgba(34,197,94,0.15);color:#22c55e;border-radius:9999px;font-weight:600;">Synced</span></td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p style="text-align:center;font-size:0.8rem;color:var(--text-muted);margin-top:1rem;font-style:italic;">Early preview of the JobberInvoice dashboard.</p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       THE PROBLEM
-       ═══════════════════════════════════════════ -->
-  <section class="accent-section" style="padding:5rem 0;">
-    <div class="container">
-      <p class="section-label reveal">The Problem</p>
-      <h2 class="section-title reveal" style="margin-bottom:1rem;">HVAC teams lose hours every week <span class="gradient-text">manually syncing jobs to QuickBooks.</span></h2>
-      <p class="section-subtitle reveal" style="margin-bottom:3rem;">Your field techs use Jobber to close jobs — but someone still has to manually re-enter each job into QuickBooks for invoicing. Missing line items, wrong tax codes, and delayed payment collection are the cost of this broken handoff.</p>
-
-      <div class="grid-3">
-        <div class="glass-card reveal reveal-delay-1">
-          <div style="width:2.75rem;height:2.75rem;border-radius:12px;background:rgba(239,68,68,0.12);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          </div>
-          <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Hours lost to manual double-entry</h3>
-          <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">Between Jobber and QuickBooks, your office staff spends hours re-entering the same job data. That's 20-30 hours per week per crew that could be selling service plans or managing growth.</p>
-        </div>
-        <div class="glass-card reveal reveal-delay-2">
-          <div style="width:2.75rem;height:2.75rem;border-radius:12px;background:rgba(249,115,22,0.12);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Missed line items on invoices</h3>
-          <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">A tech forgets to mark a part as billed. Labor hours don't carry over. Tax codes are manually guessed instead of auto-mapped. Every month, you leave money on the table because invoices are incomplete.</p>
-        </div>
-        <div class="glass-card reveal reveal-delay-3">
-          <div style="width:2.75rem;height:2.75rem;border-radius:12px;background:rgba(113,113,122,0.12);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">7-14 day billing delays</h3>
-          <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">Jobs finish on Friday, but invoices don't hit QB until Monday or Tuesday. Cash flow gaps hurt growth. Customers expect invoices same day. And collection rates drop the longer you wait.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       HOW IT WORKS
-       ═══════════════════════════════════════════ -->
-  <section id="how-it-works" style="padding:5rem 0;">
-    <div class="container">
-      <p class="section-label reveal">How It Works</p>
-      <h2 class="section-title reveal" style="margin-bottom:3rem;">From job close to <span class="gradient-text">QuickBooks invoice in 2 minutes</span></h2>
-
-      <div style="display:flex;flex-direction:column;gap:1.5rem;">
-        <div class="glass-card reveal reveal-delay-1" style="display:flex;gap:1.5rem;align-items:flex-start;">
-          <div class="step-num">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <div>
-            <p style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600;margin-bottom:0.25rem;">Step 1</p>
-            <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:0.35rem;">Tech closes job in Jobber</h3>
-            <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">Your technician marks the job complete in Jobber, logs labor hours, confirms parts, and closes it. JobberInvoice immediately detects the closed job via Jobber API.</p>
-          </div>
-        </div>
-        <div class="glass-card reveal reveal-delay-2" style="display:flex;gap:1.5rem;align-items:flex-start;">
-          <div class="step-num">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-          </div>
-          <div>
-            <p style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600;margin-bottom:0.25rem;">Step 2</p>
-            <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:0.35rem;">JobberInvoice maps line items + taxes</h3>
-            <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">Labor hours, parts, and service fees from Jobber are automatically mapped to your QuickBooks chart of accounts. Tax codes are applied per your setup. No manual data entry.</p>
-          </div>
-        </div>
-        <div class="glass-card reveal reveal-delay-3" style="display:flex;gap:1.5rem;align-items:flex-start;">
-          <div class="step-num">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <div>
-            <p style="font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:600;margin-bottom:0.25rem;">Step 3</p>
-            <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:0.35rem;">Invoice created in QuickBooks</h3>
-            <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.6;">A complete invoice is created in QuickBooks (Online or Desktop) with all line items, labor, parts, and taxes. Ready to send, ready to print, ready for cash flow tracking.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Flow diagram (desktop) -->
-      <div class="hide-mobile reveal reveal-delay-2" style="margin-top:3rem;">
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
-          <div style="display:flex;align-items:center;gap:0.5rem;">
-            <div style="width:2.75rem;height:2.75rem;border-radius:12px;background:rgba(249,115,22,0.15);display:flex;align-items:center;justify-content:center;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            </div>
-            <div>
-              <p style="font-size:0.7rem;font-weight:700;color:var(--text-primary);margin:0;">Job Closed</p>
-              <p style="font-size:0.55rem;color:var(--text-muted);margin:0;">In Jobber</p>
-            </div>
-          </div>
-          <div style="flex:1;max-width:80px;height:2px;background:linear-gradient(90deg,var(--accent),#8b5cf6);position:relative;">
-            <svg width="8" height="8" viewBox="0 0 8 8" style="position:absolute;right:-4px;top:-3px;"><path d="M0 0l8 4-8 4z" fill="#8b5cf6"/></svg>
-          </div>
-          <div style="display:flex;align-items:center;gap:0.5rem;">
-            <div style="width:2.75rem;height:2.75rem;border-radius:12px;background:rgba(139,92,246,0.15);display:flex;align-items:center;justify-content:center;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-            </div>
-            <div>
-              <p style="font-size:0.7rem;font-weight:700;color:var(--text-primary);margin:0;">Line Items Mapped</p>
-              <p style="font-size:0.55rem;color:var(--text-muted);margin:0;">Taxes auto-set</p>
-            </div>
-          </div>
-          <div style="flex:1;max-width:80px;height:2px;background:linear-gradient(90deg,#8b5cf6,#f59e0b);position:relative;">
-            <svg width="8" height="8" viewBox="0 0 8 8" style="position:absolute;right:-4px;top:-3px;"><path d="M0 0l8 4-8 4z" fill="#f59e0b"/></svg>
-          </div>
-          <div style="display:flex;align-items:center;gap:0.5rem;">
-            <div style="width:2.75rem;height:2.75rem;border-radius:12px;background:rgba(245,158,11,0.15);display:flex;align-items:center;justify-content:center;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M13 2H3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/><polyline points="17 5 21 9 17 13"/></svg>
-            </div>
-            <div>
-              <p style="font-size:0.7rem;font-weight:700;color:var(--text-primary);margin:0;">Sync to QB</p>
-              <p style="font-size:0.55rem;color:var(--text-muted);margin:0;">2 min</p>
-            </div>
-          </div>
-          <div style="flex:1;max-width:80px;height:2px;background:linear-gradient(90deg,#f59e0b,#22c55e);position:relative;">
-            <svg width="8" height="8" viewBox="0 0 8 8" style="position:absolute;right:-4px;top:-3px;"><path d="M0 0l8 4-8 4z" fill="#22c55e"/></svg>
-          </div>
-          <div style="display:flex;align-items:center;gap:0.5rem;">
-            <div style="width:2.75rem;height:2.75rem;border-radius:12px;background:rgba(34,197,94,0.15);display:flex;align-items:center;justify-content:center;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            </div>
-            <div>
-              <p style="font-size:0.7rem;font-weight:700;color:var(--text-primary);margin:0;">Invoice Live</p>
-              <p style="font-size:0.55rem;color:var(--text-muted);margin:0;">Ready to send</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       BUILT FOR
-       ═══════════════════════════════════════════ -->
-  <section style="padding:4rem 0;">
-    <div class="container">
-      <p class="section-label reveal">Built For</p>
-      <h2 class="section-title reveal" style="margin-bottom:2rem;"><span class="gradient-text">HVAC field service teams</span> that value time and cash flow.</h2>
-      <div class="reveal" style="display:flex;flex-wrap:wrap;gap:0.75rem;">
-        <span class="tag" style="display:inline-flex;align-items:center;gap:0.4rem;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.75"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/></svg>
-          2-8 Technician HVAC Companies
-        </span>
-        <span class="tag" style="display:inline-flex;align-items:center;gap:0.4rem;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Jobber + QuickBooks Users
-        </span>
-        <span class="tag" style="display:inline-flex;align-items:center;gap:0.4rem;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.75"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-          Residential Service Teams
-        </span>
-        <span class="tag" style="display:inline-flex;align-items:center;gap:0.4rem;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.75"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-          Multi-Location Shops
-        </span>
-        <span class="tag" style="display:inline-flex;align-items:center;gap:0.4rem;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Companies Scaling Revenue
-        </span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       WAITLIST / SIGNUP FORM
-       ═══════════════════════════════════════════ -->
-  <section id="waitlist" class="accent-section" style="padding:5rem 0;">
-    <div class="container" style="max-width:560px;">
-      <div class="founding-box reveal">
-        <div style="text-align:center;margin-bottom:2rem;">
-          <div class="badge" style="margin-bottom:1rem;"><span class="dot"></span> Limited founding member spots</div>
-          <h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);margin-bottom:0.5rem;">Stop typing invoices <span class="gradient-text">twice</span></h2>
-          <p style="font-size:0.95rem;color:var(--text-secondary);">Sign up and we will show you how JobberInvoice eliminates double-entry between Jobber and QuickBooks.</p>
-        </div>
-
-        <form id="waitlist-form" style="display:flex;flex-direction:column;gap:1rem;" onsubmit="return handleSubmit(event)">
-          <input type="email" name="email" required placeholder="Work email" style="padding:0.85rem 1rem;" />
-          <input type="text" name="first_name" placeholder="First name (optional)" style="padding:0.85rem 1rem;" />
-          <select name="company_size" style="padding:0.85rem 1rem;">
-            <option value="" disabled selected>How many technicians at your company?</option>
-            <option value="1-3">1-3 technicians</option>
-            <option value="4-8">4-8 technicians</option>
-            <option value="9-15">9-15 technicians</option>
-            <option value="16+">16+ technicians</option>
-          </select>
-          <select name="accounting_software" style="padding:0.85rem 1rem;">
-            <option value="" disabled selected>Which accounting software do you use?</option>
-            <option value="quickbooks-online">QuickBooks Online</option>
-            <option value="quickbooks-desktop">QuickBooks Desktop</option>
-            <option value="other">Other</option>
-          </select>
-
-          <!-- Honeypot -->
-          <div style="position:absolute;left:-5000px;" aria-hidden="true">
-            <input type="text" name="website" tabindex="-1" autocomplete="off" />
-          </div>
-
-          <button type="submit" id="submit-btn" class="btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;">
-            Stop Typing Invoices Twice
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <div class="reveal-scale capabilities-wrap" style="max-width:1000px;margin:0 auto;display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#111114;">
+        <!-- Tab List (left sidebar) -->
+        <div style="border-right:1px solid var(--border);padding:1.25rem 0;">
+          <button class="cap-tab active" data-tab="0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Auto-Sync
           </button>
-        </form>
-
-        <div id="form-success" style="display:none;text-align:center;padding:2rem 0;">
-          <div style="width:3rem;height:3rem;border-radius:50%;background:rgba(34,197,94,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <h3 style="font-size:1.25rem;font-weight:800;color:var(--text-primary);margin-bottom:0.5rem;">You're on the list!</h3>
-          <p style="font-size:0.95rem;color:var(--text-secondary);">We'll reach out within 48 hours with next steps. Keep an eye on your inbox.</p>
+          <button class="cap-tab" data-tab="1">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            Line Item Mapping
+          </button>
+          <button class="cap-tab" data-tab="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            Payment Tracking
+          </button>
+          <button class="cap-tab" data-tab="3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            Error Handling
+          </button>
+          <button class="cap-tab" data-tab="4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            Multi-Crew Support
+          </button>
         </div>
 
-        <p style="text-align:center;margin-top:1.25rem;font-size:0.85rem;color:var(--text-muted);">
-          or <a href="#" onclick="openCalendly();return false;" style="color:var(--accent);text-decoration:underline;cursor:pointer;">book a 15-min call with the founder</a>
-        </p>
+        <!-- Tab Panels (right content area) -->
+        <div class="cap-panels-container" style="padding:2.5rem;position:relative;min-height:380px;">
+          <!-- Panel 0: Auto-Sync -->
+          <div class="cap-panel active" data-panel="0">
+            <h3 style="font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:0.75rem;">Closed Job &#8594; QB Invoice. Automatically.</h3>
+            <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:1.25rem;">When a tech marks a job complete in Jobber, JobberInvoice creates a matching invoice draft in QuickBooks within seconds. No manual trigger, no end-of-day batch. The invoice is ready to review and send before the truck leaves the driveway.</p>
+            <div style="border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem;background:#0d0d10;">
+              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+                <span style="background:rgba(34,197,94,0.15);color:#22c55e;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:6px;">SYNCED</span>
+                <span style="font-size:0.85rem;color:var(--text-primary);font-weight:600;">Job #1847 &mdash; Johnson HVAC Repair</span>
+              </div>
+              <div style="display:flex;gap:2rem;font-size:0.8rem;color:var(--text-muted);">
+                <span>Jobber: Closed 2:14 PM</span>
+                <span>QB Invoice #4291 created 2:14 PM</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="cap-chip">Webhook-triggered</span>
+              <span class="cap-chip">Sub-second latency</span>
+              <span class="cap-chip">Draft or auto-send</span>
+            </div>
+          </div>
+
+          <!-- Panel 1: Line Item Mapping -->
+          <div class="cap-panel" data-panel="1">
+            <h3 style="font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:0.75rem;">Every line item lands in the right QB account.</h3>
+            <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:1.25rem;">Services, materials, labor hours, and parts from Jobber are mapped to the correct QuickBooks income accounts and item codes. You set up the mapping once; JobberInvoice applies it to every job going forward.</p>
+            <div style="border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem;background:#0d0d10;">
+              <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0.5rem;font-size:0.8rem;">
+                <span style="color:var(--text-muted);font-weight:600;">Jobber Line</span>
+                <span></span>
+                <span style="color:var(--text-muted);font-weight:600;">QB Account</span>
+                <span style="color:var(--text-secondary);">HVAC Diagnostic Fee</span>
+                <span style="color:var(--cyan);">&#8594;</span>
+                <span style="color:var(--text-secondary);">4100 &middot; Service Revenue</span>
+                <span style="color:var(--text-secondary);">Capacitor 45/5 MFD</span>
+                <span style="color:var(--cyan);">&#8594;</span>
+                <span style="color:var(--text-secondary);">4200 &middot; Parts Revenue</span>
+                <span style="color:var(--text-secondary);">Labor &mdash; 2.5 hrs</span>
+                <span style="color:var(--cyan);">&#8594;</span>
+                <span style="color:var(--text-secondary);">4300 &middot; Labor Revenue</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="cap-chip">One-time setup</span>
+              <span class="cap-chip">Custom mappings</span>
+              <span class="cap-chip">Tax-code aware</span>
+            </div>
+          </div>
+
+          <!-- Panel 2: Payment Tracking -->
+          <div class="cap-panel" data-panel="2">
+            <h3 style="font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:0.75rem;">Payments sync back for clean reconciliation.</h3>
+            <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:1.25rem;">When a customer pays through Jobber, that payment is recorded against the matching QB invoice. No more chasing down which payments match which invoices at month-end. Your aging report stays accurate in real time.</p>
+            <div style="border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem;background:#0d0d10;">
+              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+                <span style="background:rgba(249,115,22,0.15);color:var(--cyan);font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:6px;">PAYMENT</span>
+                <span style="font-size:0.85rem;color:var(--text-primary);font-weight:600;">Invoice #4291 &mdash; $847.50 received</span>
+              </div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">Jobber payment &#8594; QB payment applied &#8594; Invoice marked Paid</div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="cap-chip">Auto-reconciliation</span>
+              <span class="cap-chip">Real-time aging</span>
+              <span class="cap-chip">Partial payments</span>
+            </div>
+          </div>
+
+          <!-- Panel 3: Error Handling -->
+          <div class="cap-panel" data-panel="3">
+            <h3 style="font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:0.75rem;">Mismatches caught before they become problems.</h3>
+            <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:1.25rem;">If a Jobber line item doesn't have a QB mapping, or a customer record is missing, JobberInvoice flags it immediately instead of creating a broken invoice. You fix it once, and the sync retries automatically.</p>
+            <div style="border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem;background:#0d0d10;">
+              <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+                <span style="background:rgba(239,68,68,0.15);color:#ef4444;font-size:0.7rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:6px;">NEEDS ATTENTION</span>
+                <span style="font-size:0.85rem;color:var(--text-primary);font-weight:600;">Job #1852 &mdash; unmapped item</span>
+              </div>
+              <div style="font-size:0.8rem;color:var(--text-muted);">"Emergency Call-Out Fee" has no QB mapping. <span style="color:var(--cyan);cursor:pointer;">Map it now &#8594;</span></div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="cap-chip">Pre-sync validation</span>
+              <span class="cap-chip">Auto-retry</span>
+              <span class="cap-chip">Email alerts</span>
+            </div>
+          </div>
+
+          <!-- Panel 4: Multi-Crew Support -->
+          <div class="cap-panel" data-panel="4">
+            <h3 style="font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:0.75rem;">Works across all your field teams.</h3>
+            <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:1.25rem;">Whether you run 2 trucks or 20, every tech's closed jobs flow through the same sync pipeline. No per-user setup. The office manager sees one clean queue of synced invoices instead of chasing each crew's paperwork separately.</p>
+            <div style="border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem;background:#0d0d10;">
+              <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.8rem;">
+                <div style="display:flex;justify-content:space-between;color:var(--text-secondary);"><span>Crew A &mdash; Mike R.</span><span style="color:#22c55e;">3 jobs synced today</span></div>
+                <div style="display:flex;justify-content:space-between;color:var(--text-secondary);"><span>Crew B &mdash; Dave T.</span><span style="color:#22c55e;">2 jobs synced today</span></div>
+                <div style="display:flex;justify-content:space-between;color:var(--text-secondary);"><span>Crew C &mdash; Sarah K.</span><span style="color:var(--cyan);">1 job pending review</span></div>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="cap-chip">Unlimited techs</span>
+              <span class="cap-chip">Per-crew visibility</span>
+              <span class="cap-chip">No extra cost</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
 
   <!-- ═══════════════════════════════════════════
-       INCUBATOR BADGE
+       THE PROBLEM — headline + 3 glass cards
        ═══════════════════════════════════════════ -->
-  <section style="padding:2.5rem 0;">
-    <div class="container reveal" style="text-align:center;">
-      <div style="display:inline-flex;align-items:center;gap:1rem;padding:1rem 1.5rem;border:1px solid var(--border);border-radius:12px;background:var(--surface);">
-        <img src="https://leanaistudio.com/founder.jpeg" alt="Dario Verghi" style="width:36px;height:36px;border-radius:50%;object-fit:cover;" />
-        <div style="text-align:left;">
-          <p style="margin:0;font-size:0.8rem;color:var(--text-secondary);">A project by <a href="https://leanaistudio.com" style="color:var(--accent);text-decoration:none;font-weight:600;" target="_blank">LeanAI Studio</a>, built by Dario Verghi</p>
-          <p style="margin:0;font-size:0.75rem;color:var(--text-muted);">We're building this if 50 people sign up. Help us validate the idea.</p>
+  <section id="the-problem">
+    <div class="container">
+      <div class="grid-2" style="gap:2.5rem;align-items:center;">
+        <div class="reveal">
+          <p class="section-label">The Problem</p>
+          <h2 class="section-title">
+            Jobber closes jobs. QuickBooks needs invoices. <span class="gradient-text">You're stuck in the middle.</span>
+          </h2>
+        </div>
+        <div class="reveal reveal-delay-2 mobile-hide-img" style="border-radius:16px;overflow:hidden;background:var(--surface);display:flex;align-items:center;justify-content:center;min-height:200px;">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1" stroke-linecap="round" style="opacity:0.3;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:3rem;">
+        <div class="glass-card reveal reveal-delay-1">
+          <div style="width:3.25rem;height:3.25rem;border-radius:14px;background:rgba(239,68,68,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Manual Retyping</h3>
+          <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">The office manager re-enters every closed job from Jobber into QuickBooks. Wrong rates, missing line items, and typos slip through daily.</p>
+        </div>
+
+        <div class="glass-card reveal reveal-delay-2">
+          <div style="width:3.25rem;height:3.25rem;border-radius:14px;background:rgba(249,115,22,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Delayed Invoicing</h3>
+          <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">Invoices sit in a queue for 24-48 hours. Customers don't get billed on time, cash flow suffers, and aging reports are always stale.</p>
+        </div>
+
+        <div class="glass-card reveal reveal-delay-3">
+          <div style="width:3.25rem;height:3.25rem;border-radius:14px;background:rgba(113,113,122,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+          </div>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Reconciliation Nightmare</h3>
+          <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">Payments in Jobber don't match invoices in QB. The accountant spends hours digging through mismatches every month-end and tax season.</p>
         </div>
       </div>
     </div>
   </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       HOW IT WORKS — Pipeline flow + step cards
+       ═══════════════════════════════════════════ -->
+  <section id="how-it-works" style="background:linear-gradient(135deg,rgba(249,115,22,0.03) 0%,rgba(249,115,22,0.01) 100%);border-top:1px solid rgba(249,115,22,0.1);border-bottom:1px solid rgba(249,115,22,0.1);">
+    <div class="container">
+      <div style="margin-bottom:3rem;">
+        <p class="section-label">How It Works</p>
+        <h2 class="section-title">Four steps from <span class="gradient-text">job closed to invoice sent.</span></h2>
+      </div>
+
+      <!-- Pipeline flow — horizontal, desktop only -->
+      <div class="reveal hide-mobile" style="display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:3rem;padding:1.5rem 2rem;background:var(--surface);border:1px solid var(--border);border-radius:16px;">
+        <!-- Stage 1 (orange) -->
+        <div class="pipeline-step">
+          <div class="pipeline-icon" style="background:rgba(249,115,22,0.15);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.75" stroke-linecap="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg>
+          </div>
+          <div>
+            <p style="margin:0;font-size:0.75rem;font-weight:700;color:var(--text-primary);">Job Closed</p>
+            <p style="margin:0;font-size:0.6rem;color:var(--text-muted);">Tech marks complete</p>
+          </div>
+        </div>
+        <div class="pipeline-arrow">
+          <div class="line" style="background:linear-gradient(90deg,rgba(249,115,22,0.3),rgba(139,92,246,0.2));"></div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <!-- Stage 2 (purple) -->
+        <div class="pipeline-step">
+          <div class="pipeline-icon" style="background:rgba(139,92,246,0.12);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.75" stroke-linecap="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <div>
+            <p style="margin:0;font-size:0.75rem;font-weight:700;color:var(--text-primary);">Line Items Mapped</p>
+            <p style="margin:0;font-size:0.6rem;color:var(--text-muted);">Services, parts, labor</p>
+          </div>
+        </div>
+        <div class="pipeline-arrow">
+          <div class="line" style="background:linear-gradient(90deg,rgba(139,92,246,0.2),rgba(245,158,11,0.2));"></div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <!-- Stage 3 (amber) -->
+        <div class="pipeline-step">
+          <div class="pipeline-icon" style="background:rgba(245,158,11,0.1);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.75" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+          </div>
+          <div>
+            <p style="margin:0;font-size:0.75rem;font-weight:700;color:var(--text-primary);">Sync to QB</p>
+            <p style="margin:0;font-size:0.6rem;color:var(--text-muted);">Invoice draft created</p>
+          </div>
+        </div>
+        <div class="pipeline-arrow">
+          <div class="line" style="background:linear-gradient(90deg,rgba(245,158,11,0.2),rgba(34,197,94,0.2));"></div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <!-- Stage 4 (green) -->
+        <div class="pipeline-step">
+          <div class="pipeline-icon" style="background:rgba(34,197,94,0.1);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.75" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div>
+            <p style="margin:0;font-size:0.75rem;font-weight:700;color:var(--text-primary);">Invoice Sent</p>
+            <p style="margin:0;font-size:0.6rem;color:var(--text-muted);">Review once, publish</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step cards -->
+      <div class="grid-2" style="gap:2rem;">
+        <div class="glass-card reveal reveal-delay-1" style="position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right, var(--cyan-glow), transparent);pointer-events:none;"></div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;">
+            <div class="step-num">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+            </div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);">Step 1</span>
+          </div>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Tech closes the job in Jobber</h3>
+          <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">Your field tech marks the job complete in the Jobber app, just like they always do. Nothing changes for the crew. The webhook fires the moment the status flips.</p>
+        </div>
+
+        <div class="glass-card reveal reveal-delay-2" style="position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right, var(--cyan-glow), transparent);pointer-events:none;"></div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;">
+            <div class="step-num">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/></svg>
+            </div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);">Step 2</span>
+          </div>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Line items mapped to QB accounts</h3>
+          <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">JobberInvoice reads each service line, part, and labor entry from the job. It maps them to your QuickBooks income accounts using the rules you set up once. Tax codes applied automatically.</p>
+        </div>
+
+        <div class="glass-card reveal reveal-delay-3" style="position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right, var(--cyan-glow), transparent);pointer-events:none;"></div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;">
+            <div class="step-num">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10"/></svg>
+            </div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);">Step 3</span>
+          </div>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Invoice drafts in QuickBooks</h3>
+          <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">A complete invoice draft appears in QB with the right customer, line items, amounts, and tax. No copy-paste, no retyping. If anything doesn't match, you get an alert instead of a broken invoice.</p>
+        </div>
+
+        <div class="glass-card reveal reveal-delay-1" style="position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right, var(--cyan-glow), transparent);pointer-events:none;"></div>
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;">
+            <div class="step-num">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);">Step 4</span>
+          </div>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Review once, send to customer</h3>
+          <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">The office manager glances at the draft, confirms it looks right, and hits send. What used to take 15 minutes of data entry per job now takes a 10-second review. Customers get invoiced the same day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       BUILT FOR — headline, persona cards, tags
+       ═══════════════════════════════════════════ -->
+  <section id="built-for">
+    <div class="container">
+      <div class="grid-2" style="gap:3rem;align-items:center;">
+        <div class="reveal">
+          <p class="section-label">Built For</p>
+          <h2 class="section-title">Built for <span class="gradient-text">field service teams on Jobber.</span></h2>
+        </div>
+        <div class="reveal reveal-delay-2 mobile-hide-img" style="border-radius:16px;overflow:hidden;background:var(--surface);display:flex;align-items:center;justify-content:center;min-height:180px;">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1" stroke-linecap="round" style="opacity:0.3;"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:2rem;gap:2rem;">
+        <div class="glass-card reveal reveal-delay-1">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);display:block;margin-bottom:1rem;">Office Manager</span>
+          <h3 style="font-size:1.15rem;font-weight:700;color:var(--text-primary);margin-bottom:0.75rem;">Stop spending evenings on data entry</h3>
+          <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">You run dispatch, handle customers, and manage the schedule. Retyping every job into QuickBooks shouldn't be part of your day. JobberInvoice takes that off your plate so you can focus on running the business.</p>
+        </div>
+
+        <div class="glass-card reveal reveal-delay-2">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-muted);display:block;margin-bottom:1rem;">Owner / Operator</span>
+          <h3 style="font-size:1.15rem;font-weight:700;color:var(--text-primary);margin-bottom:0.75rem;">See your real cash position today, not tomorrow</h3>
+          <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">When invoices lag 24-48 hours behind completed work, your QuickBooks is always a day old. JobberInvoice keeps your books current so you can make decisions based on today's numbers, not yesterday's.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;display:flex;flex-wrap:wrap;gap:0.65rem;" class="reveal">
+        <span class="tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.75" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          HVAC
+        </span>
+        <span class="tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.75" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Plumbing
+        </span>
+        <span class="tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.75" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Electrical
+        </span>
+        <span class="tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          Landscaping
+        </span>
+        <span class="tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.75" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          Cleaning
+        </span>
+        <span class="tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.75" stroke-linecap="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          General Contractors
+        </span>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ═══════════════════════════════════════════
+       WAITLIST — 2-column: benefits left, form right
+       ═══════════════════════════════════════════ -->
+  <section id="waitlist">
+    <div class="container">
+      <div class="founding-box">
+      <div class="grid-2" style="gap:3rem 5rem;align-items:start;">
+        <!-- Left: copy -->
+        <div class="reveal">
+          <p class="section-label">Early Access &middot; Limited Spots &middot; No credit card required</p>
+          <h2 class="section-title" style="margin-bottom:1.5rem;">Be among the first to use <span class="gradient-text">JobberInvoice.</span></h2>
+          <p style="color:var(--text-secondary);line-height:1.7;font-size:0.95rem;margin-bottom:2rem;">
+            We're building JobberInvoice for field service shops that are tired of retyping every job into QuickBooks. Sign up now to get free early access when we launch, plus founding member pricing locked in for life.
+          </p>
+
+          <p style="font-weight:700;color:var(--text-primary);font-size:0.95rem;margin-bottom:0.75rem;">What you'll get:</p>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem;margin-bottom:1.5rem;">
+            <p style="display:flex;align-items:center;gap:0.625rem;color:var(--text-secondary);margin:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Free beta access before public launch
+            </p>
+            <p style="display:flex;align-items:center;gap:0.625rem;color:var(--text-secondary);margin:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Founding member pricing locked for life
+            </p>
+            <p style="display:flex;align-items:center;gap:0.625rem;color:var(--text-secondary);margin:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Direct line to the founder for feature requests
+            </p>
+          </div>
+          <p style="color:var(--cyan);font-size:0.85rem;line-height:1.6;margin:0;">We're building this if 50 shops sign up &mdash; help us validate the idea.</p>
+        </div>
+
+        <!-- Right: form -->
+        <div class="reveal reveal-delay-1">
+          <!-- Success state -->
+          <div id="success-message" style="display:none;padding:2.5rem 0;">
+            <div style="width:3rem;height:3rem;background:rgba(249,115,22,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h2 style="font-size:1.5rem;font-weight:700;color:var(--text-primary);margin-bottom:0.75rem;">You are on the list!</h2>
+            <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.65;margin:0;">We will email you when early access opens. Keep an eye on your inbox.</p>
+          </div>
+
+          <!-- Form -->
+          <form id="signup-form" onsubmit="handleSubmit(event)" style="display:flex;flex-direction:column;gap:1.25rem;">
+            <div>
+              <label style="display:block;font-size:0.875rem;font-weight:500;color:var(--text-primary);margin-bottom:0.375rem;">Work email <span style="color:var(--cyan);">*</span></label>
+              <input id="email" type="email" required placeholder="you@yourcompany.com" style="width:100%;padding:0.65rem 1rem;box-sizing:border-box;" />
+            </div>
+
+            <!-- Progressive disclosure step 2 -->
+            <div id="form-step-2" style="display:none;flex-direction:column;gap:1.25rem;">
+              <div>
+                <label style="display:block;font-size:0.875rem;font-weight:500;color:var(--text-primary);margin-bottom:0.375rem;">First name</label>
+                <input id="first-name" type="text" placeholder="Mike" style="width:100%;padding:0.65rem 1rem;box-sizing:border-box;" />
+              </div>
+              <div>
+                <label style="display:block;font-size:0.875rem;font-weight:500;color:var(--text-primary);margin-bottom:0.375rem;">How many field techs?</label>
+                <select id="qualifying-q1" style="width:100%;padding:0.65rem 1rem;box-sizing:border-box;">
+                  <option value="" disabled selected>Select a range&hellip;</option>
+                  <option value="1-3">1-3 techs</option>
+                  <option value="4-10">4-10 techs</option>
+                  <option value="11-20">11-20 techs</option>
+                  <option value="20+">20+ techs</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:0.875rem;font-weight:500;color:var(--text-primary);margin-bottom:0.375rem;">How do you invoice now?</label>
+                <select id="qualifying-q2" style="width:100%;padding:0.65rem 1rem;box-sizing:border-box;">
+                  <option value="" disabled selected>Select one&hellip;</option>
+                  <option value="manual-qb">Manual entry in QuickBooks</option>
+                  <option value="zapier">Zapier or other integration</option>
+                  <option value="spreadsheet">Spreadsheet export</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" id="submit-btn" class="btn-primary">
+              Join the waitlist for early access
+            </button>
+            <p style="font-size:0.75rem;color:rgba(180,210,230,0.65);text-align:center;margin:0;">By signing up you accept our <a href="/privacy.html" style="color:var(--cyan);text-decoration:underline;">Privacy Policy</a> and analytics cookies. No spam &mdash; we will only contact you about JobberInvoice.</p>
+            <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-top:1rem;padding:0.75rem 1rem;border:1px solid var(--border);border-radius:12px;background:var(--surface);cursor:pointer;" onclick="openCalendly(event)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span style="font-size:0.875rem;color:var(--cyan);font-weight:600;">Book a call with the founder</span>
+            </div>
+          </form>
+        </div>
+      </div>
+      </div><!-- /.founding-box -->
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       PROOF BADGE — LeanAI Studio attribution
+       ═══════════════════════════════════════════ -->
+  <section style="padding:2.5rem 0 0;">
+    <div class="container" style="text-align:center;">
+      <div class="reveal" style="display:inline-flex;align-items:center;gap:1rem;padding:1rem 1.5rem;border:1px solid var(--border);border-radius:14px;background:var(--surface);">
+        <img src="https://leanaistudio.com/founder.jpeg" alt="Dario Verghi" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(249,115,22,0.2);" />
+        <div style="text-align:left;">
+          <p style="margin:0;font-size:0.875rem;color:var(--text-primary);font-weight:600;">A project by <a href="https://leanaistudio.com" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;">LeanAI Studio</a>, built by <a href="https://www.linkedin.com/in/verghi/" target="_blank" rel="noopener" style="color:var(--cyan);text-decoration:none;">Dario Verghi</a></p>
+          <p style="margin:0.25rem 0 0;font-size:0.8125rem;color:var(--text-muted);line-height:1.5;">Building focused tools for underserved B2B niches.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- ═══════════════════════════════════════════
        FOOTER
        ═══════════════════════════════════════════ -->
-  <footer style="padding:2rem 0;border-top:1px solid var(--border);">
-    <div class="container" style="text-align:center;">
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:rgba(180,210,230,0.65);">&copy; 2026 LeanAI Studio srl &mdash; P.IVA/CF: 14561020968</p>
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:rgba(180,210,230,0.65);">JobberInvoice is a product of LeanAI Studio srl</p>
-      <p style="margin:0 0 0.5rem;font-size:0.75rem;color:rgba(180,210,230,0.5);">info@leanaistudio.com</p>
-      <p style="margin:0;font-size:0.75rem;">
-        <a href="/privacy.html" style="color:var(--accent);text-decoration:none;">Privacy Policy</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="/terms.html" style="color:var(--accent);text-decoration:none;">Terms of Service</a>
-      </p>
+  <footer style="padding:2.5rem 0;margin-top:1rem;">
+    <div class="container">
+      <div class="sep" style="margin-bottom:1.5rem;"></div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:1.25rem;margin-bottom:1.25rem;">
+        <div style="display:flex;align-items:center;gap:0.5rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+          <span style="font-weight:800;font-size:0.875rem;color:var(--text-primary);">JobberInvoice</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:1.5rem;font-size:0.75rem;">
+          <a href="mailto:info@leanaistudio.com" style="color:var(--text-muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='var(--text-muted)'">info@leanaistudio.com</a>
+          <a href="/privacy.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</a>
+          <a href="/terms.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--text-secondary)'" onmouseout="this.style.color='var(--text-muted)'">Terms of Service</a>
+        </div>
+      </div>
+      <div style="font-size:0.7rem;color:var(--text-muted);line-height:1.8;opacity:0.6;">
+        <p style="margin:0;">&copy; 2026 LeanAI Studio srl &mdash; P.IVA/CF: 14561020968</p>
+        <p style="margin:0;">JobberInvoice is a product of LeanAI Studio srl</p>
+      </div>
     </div>
   </footer>
 
-  <!-- ═══════════════════════════════════════════
-       FOUNDER BOOKING BADGE (floating)
-       ═══════════════════════════════════════════ -->
-  <a class="founder-booking-badge" href="#" onclick="openCalendly();return false;">
-    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    Book a call with the founder
-  </a>
-
-  <!-- ═══════════════════════════════════════════
-       CONSENT BAR
-       ═══════════════════════════════════════════ -->
-  <div id="consent-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:10000;
-    background:rgba(8,8,10,0.95);border-top:1px solid rgba(255,255,255,0.06);padding:0.75rem 2rem;
-    font-family:'Inter',system-ui,sans-serif;">
-    <div style="max-width:1120px;margin:0 auto;display:flex;align-items:center;
-      justify-content:space-between;gap:1rem;flex-wrap:wrap;">
-      <p style="margin:0;font-size:0.8125rem;color:#d1d5db;line-height:1.4;">
-        We use cookies to measure ad performance.
-        <a href="/privacy.html" style="color:var(--accent);text-decoration:underline;">Privacy Policy</a>
-      </p>
-      <div style="display:flex;gap:0.75rem;align-items:center;">
-        <button onclick="grantConsent();document.getElementById('consent-bar').style.display='none'" style="background:var(--accent);color:#08080a;border:none;
-          border-radius:0.25rem;padding:0.4rem 1.25rem;font-size:0.8125rem;font-weight:600;
-          cursor:pointer;font-family:'Inter',sans-serif;">Accept</button>
-        <button onclick="document.getElementById('consent-bar').style.display='none'"
-          style="background:transparent;color:#9ca3af;border:none;padding:0.4rem 0.75rem;
-          font-size:0.75rem;cursor:pointer;">Dismiss</button>
-      </div>
-    </div>
-  </div>
 
   <!-- ═══════════════════════════════════════════
        JAVASCRIPT
        ═══════════════════════════════════════════ -->
   <script>
-    // ── Scroll reveal ──
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal, .reveal-scale').forEach(function(el) { observer.observe(el); });
+    // ── Config ──
+    var CALENDLY_URL = 'https://calendly.com/leanaistudio/founder-call';
 
-    // ── Animated counters ──
-    var counterObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var el = entry.target;
-          var target = parseInt(el.getAttribute('data-target'));
-          var suffix = el.getAttribute('data-suffix') || '';
-          var duration = 1500;
-          var start = performance.now();
-          function animate(now) {
-            var elapsed = now - start;
-            var progress = Math.min(elapsed / duration, 1);
-            var eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.floor(target * eased) + suffix;
-            if (progress < 1) requestAnimationFrame(animate);
-          }
-          requestAnimationFrame(animate);
-          counterObserver.unobserve(el);
-        }
-      });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('.counter').forEach(function(el) { counterObserver.observe(el); });
-
-    // ── Consent bar on load ──
-    document.addEventListener('DOMContentLoaded', function() {
-      if (localStorage.getItem('cookie_consent') !== 'accepted') {
-        var bar = document.getElementById('consent-bar');
-        if (bar) bar.style.display = 'flex';
-      }
-    });
-
-    // ── Form submit ──
-    function handleSubmit(e) {
-      e.preventDefault();
-      var form = document.getElementById('waitlist-form');
-      var data = new FormData(form);
-      var email = data.get('email');
-      var firstName = data.get('first_name') || '';
-      var companySize = data.get('company_size') || '';
-      var accountingSoftware = data.get('accounting_software') || '';
-      var honeypot = data.get('website');
-      if (honeypot) return false;
-
-      // Grant consent + fire conversion
-      grantConsent();
-      if (typeof gtag === 'function') {
-        gtag('event', 'conversion', { send_to: 'AW-18071371531/z6DhCLq9-JccEIv-jKlD' });
-      }
-
-      // Vercel Analytics custom event
-      if (window.va) { window.va('event', 'waitlist-signup'); }
-
+    // ── DKI Headline Replacement ──
+    (function() {
       var params = new URLSearchParams(window.location.search);
+      var custom = params.get('headline');
+      if (custom) {
+        var h1 = document.getElementById('hero-headline');
+        if (h1) {
+          h1.setAttribute('data-default-headline', h1.innerHTML);
+          h1.textContent = decodeURIComponent(custom.replace(/\+/g, ' '));
+        }
+      }
+    })();
+
+    // ── Scroll reveal ──
+    (function() {
+      var reveals = document.querySelectorAll('.reveal, .reveal-scale');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+        });
+      }, { threshold: 0.15 });
+      reveals.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // ── Capability tabs ──
+    (function() {
+      var tabs = document.querySelectorAll('.cap-tab');
+      var panels = document.querySelectorAll('.cap-panel');
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          tabs.forEach(function(t) { t.classList.remove('active'); });
+          panels.forEach(function(p) { p.classList.remove('active'); });
+          tab.classList.add('active');
+          var idx = tab.getAttribute('data-tab');
+          document.querySelector('.cap-panel[data-panel="' + idx + '"]').classList.add('active');
+        });
+      });
+    })();
+
+    // ── UTM extraction ──
+    function getUTMParams() {
+      var params = new URLSearchParams(window.location.search);
+      var utm = {};
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k) {
+        var v = params.get(k); if (v) utm[k] = v;
+      });
+      return utm;
+    }
+
+    // ── Progressive form ──
+    var formStep = 1;
+    function showStep2() {
+      if (formStep === 1) {
+        formStep = 2;
+        document.getElementById('form-step-2').style.display = 'flex';
+      }
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      if (formStep === 1) { showStep2(); return; }
+      grantConsent();
+      var btn = document.getElementById('submit-btn');
+      btn.textContent = 'Joining...';
+      btn.disabled = true;
+
+      var utm = getUTMParams();
+      var email = document.getElementById('email').value;
+      var firstName = document.getElementById('first-name').value;
+      var q1 = document.getElementById('qualifying-q1').value || '';
+      var q2 = document.getElementById('qualifying-q2').value || '';
       var payload = {
+        secret: 'jobberinvoice-waitlist-2026',
+        product: 'JobberInvoice',
         email: email,
         first_name: firstName,
-        company_size: companySize,
-        accounting_software: accountingSoftware,
-        product: 'JobberInvoice',
-        source: 'jobberinvoice-lp',
-        utm_source: params.get('utm_source') || '',
-        utm_medium: params.get('utm_medium') || '',
-        utm_campaign: params.get('utm_campaign') || '',
-        timestamp: new Date().toISOString()
+        qualifying_q1: q1,
+        qualifying_q2: q2,
+        source: 'JobberInvoice',
+        traffic_source: utm.utm_source || 'direct',
+        submitted_at: new Date().toISOString(),
+        page_url: window.location.href
       };
+      Object.assign(payload, utm);
 
-      // Fire 3 parallel requests
-      fetch('/api/resend-notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email, first_name: firstName, product: 'JobberInvoice' }) }).catch(function(){});
-      fetch('/api/sheet-notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(function(){});
-      fetch('/api/slack-notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: 'New JobberInvoice signup: ' + email + ' (' + firstName + ') | Company: ' + companySize + ' | QB: ' + accountingSoftware }) }).catch(function(){});
+      // Slack
+      try { await fetch('/api/slack-notify', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ text:'*[JobberInvoice]* New waitlist signup!\n*Email:* '+email+'\n*Name:* '+(firstName||'n/a')+'\n*Techs:* '+(q1||'n/a')+'\n*Current method:* '+(q2||'n/a')+'\n*Traffic:* '+(utm.utm_source||'direct') }) }); } catch(ex){}
 
-      // Show success
-      form.style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
-      return false;
+      // Google Sheet
+      try { await fetch('/api/sheet-notify', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) }); } catch(ex){}
+
+      // Resend
+      try { await fetch('/api/resend-notify', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({email:email,first_name:firstName,product:payload.product}) }); } catch(ex){}
+
+      // Vercel Analytics
+      try { if(window.va) window.va('event',{name:'waitlist-signup',data:{product:'JobberInvoice',traffic_source:utm.utm_source||'direct'}}); } catch(ex){}
+
+      // Google Ads conversion
+      try { if(typeof gtag==='function') gtag('event','conversion',{send_to:'AW-18071371531/z6DhCLq9-JccEIv-jKlD',value:1.0,currency:'USD'}); } catch(ex){}
+
+      // Success
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('success-message').style.display = 'block';
     }
 
     // ── Calendly ──
     function openCalendly(e) {
-      if (e) e.preventDefault();
+      if(e) e.preventDefault();
       grantConsent();
-      // Google Ads conversion (fires on click intent)
-      try { if (typeof gtag === 'function') gtag('event', 'conversion', { send_to: 'AW-18071371531/z6DhCLq9-JccEIv-jKlD', value: 1.0, currency: 'USD' }); } catch(ex) {}
-      // Vercel Analytics event
-      try { if (window.va) window.va('event', { name: 'calendly-booking', data: { product: 'JobberInvoice' } }); } catch(ex) {}
-      // Open Calendly popup with product-specific UTMs
-      if (window.Calendly) {
-        Calendly.initPopupWidget({ url: 'https://calendly.com/leanaistudio/founder-call?utm_source=jobberinvoice&utm_medium=lp&utm_campaign=founder-call' + '?utm_source=' + encodeURIComponent('JobberInvoice') + '&utm_medium=lp&utm_campaign=founder-call' });
-      }
+      try { if(typeof gtag==='function') gtag('event','conversion',{send_to:'AW-18071371531/z6DhCLq9-JccEIv-jKlD',value:1.0,currency:'USD'}); } catch(ex){}
+      try { if(window.va) window.va('event',{name:'calendly-booking',data:{product:'jobberinvoice'}}); } catch(ex){}
+      if(window.Calendly) { Calendly.initPopupWidget({url:CALENDLY_URL+'?utm_source='+encodeURIComponent('jobberinvoice')+'&utm_medium=lp&utm_campaign=founder-call'}); }
       return false;
     }
 
-    // Calendly event_scheduled listener: fires when booking is confirmed
-    // Captures real invitee name + email from Calendly widget postMessage
+    // Calendly confirmed booking listener
     window.addEventListener('message', function(ev) {
-      if (!ev.data || ev.data.event !== 'calendly.event_scheduled') return;
-      var payload = ev.data.payload || {};
-      var invitee = payload.invitee || {};
-      var invEmail = invitee.email || 'calendly-booking';
-      var invName = invitee.name || '';
-      var slug = 'JobberInvoice';
-      var displayName = 'JobberInvoice';
-      // Log to Google Sheets (always, even without email)
-      try { fetch('/api/sheet-notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: invEmail, first_name: invName, product: slug, source: 'calendly', submitted_at: new Date().toISOString() }) }); } catch(ex) {}
-      // Log to Resend (only if we got a real email)
-      if (invEmail && invEmail !== 'calendly-booking') {
-        try { fetch('/api/resend-notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: invEmail, first_name: invName, product: slug }) }); } catch(ex) {}
-      }
-      // Log to Slack with proper text field
-      try { fetch('/api/slack-notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: '*[' + displayName + ']* Calendly booking confirmed!\n*Email:* ' + invEmail + '\n*Name:* ' + (invName || 'n/a') + '\n*Source:* LP founder badge' }) }); } catch(ex) {}
+      if(!ev.data||ev.data.event!=='calendly.event_scheduled') return;
+      var p=ev.data.payload||{}, inv=p.invitee||{};
+      try { if(typeof gtag==='function') gtag('event','conversion',{send_to:'AW-18071371531/z6DhCLq9-JccEIv-jKlD',value:5.0,currency:'USD'}); } catch(ex){}
+      try { fetch('/api/slack-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:'*[JobberInvoice]* Calendly booked! '+(inv.email||'unknown')})}); } catch(ex){}
     });
-  
-    /* ── Aha Morphing Animation ── */
-    (function() {
-      var form = document.getElementById('aha-form');
-      var status = document.getElementById('aha-status');
-      var caption = document.getElementById('aha-caption');
-      var scanBar = document.getElementById('aha-scan-bar');
-      var timer = document.getElementById('aha-timer');
-      var timerText = document.getElementById('aha-timer-text');
-      if (!form || !status) return;
-      var fields = form.querySelectorAll('.aha-field-value');
-      var section = document.getElementById('aha-section');
-      var started = false;
-      function runCycle() {
-        form.className = 'aha-form state-pain';
-        status.className = 'aha-status pain';
-        status.textContent = 'Manual Entry';
-        caption.style.color = '#ef4444';
-        caption.textContent = 'Re-typing completed job details into invoice template...';
-        scanBar.style.width = '0';
-        scanBar.style.background = 'transparent';
-        timer.style.color = '#ef4444';
-        timerText.textContent = '~8 minutes per invoice';
-        fields.forEach(function(f) { f.textContent = f.dataset.pain; });
-        setTimeout(function() {
-          form.className = 'aha-form state-syncing';
-          status.className = 'aha-status syncing';
-          status.textContent = 'Syncing Jobber...';
-          caption.style.color = '#a855f7';
-          caption.textContent = 'JobberInvoice pulling job data from Jobber...';
-          scanBar.style.background = 'linear-gradient(90deg, #a855f7, #8b5cf6)';
-          scanBar.style.width = '100%';
-          timer.style.color = '#a855f7';
-          timerText.textContent = 'Pulling job data...';
-        }, 3000);
-        setTimeout(function() {
-          fields.forEach(function(f, i) {
-            setTimeout(function() { f.textContent = f.dataset.done; }, i * 150);
-          });
-        }, 4500);
-        setTimeout(function() {
-          form.className = 'aha-form state-done';
-          status.className = 'aha-status done';
-          status.textContent = 'Done in 6s';
-          caption.style.color = '#22c55e';
-          caption.textContent = 'Invoice generated. Parts + labor matched. Ready to send.';
-          scanBar.style.background = 'linear-gradient(90deg, #22c55e, #16a34a)';
-          timer.style.color = '#22c55e';
-          timerText.textContent = '6 seconds — zero re-entry';
-        }, 6000);
-        setTimeout(function() { runCycle(); }, 10000);
-      }
-      var ahaObs = new IntersectionObserver(function(entries) {
-        if (entries[0].isIntersecting && !started) {
-          started = true;
-          runCycle();
-          ahaObs.unobserve(section);
-        }
-      }, { threshold: 0.3 });
-      ahaObs.observe(section);
-    })();
-
   </script>
-
-
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>
