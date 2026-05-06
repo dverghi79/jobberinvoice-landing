@@ -388,14 +388,9 @@
           </div>
         </div>
 
-        <!-- Right: Hero image placeholder -->
-        <div class="hero-image reveal reveal-delay-2" style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;min-height:360px;">
-          <div style="text-align:center;padding:2rem;">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.4;">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-            </svg>
-            <p style="color:var(--text-muted);font-size:0.85rem;margin-top:1rem;">Product preview coming soon</p>
-          </div>
+        <!-- Right: Hero AI image (generated via DrawThings MCP) -->
+        <div class="hero-image reveal reveal-delay-2" style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);border:1px solid var(--border);">
+          <img src="images/hero-user.png" alt="Field service technician completing a job on a tablet while an invoice syncs automatically to QuickBooks" style="width:100%;height:auto;display:block;" loading="eager" onerror="this.parentElement.style.background='var(--surface)';this.parentElement.style.minHeight='360px';this.style.display='none';" />
         </div>
       </div>
     </div>
@@ -434,6 +429,14 @@
           <button class="cap-tab" data-tab="4">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
             Multi-Crew Support
+          </button>
+          <button class="cap-tab" data-tab="5">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Tax Code Mapping
+          </button>
+          <button class="cap-tab" data-tab="6">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Sync Dashboard
           </button>
         </div>
 
@@ -540,6 +543,60 @@
               <span class="cap-chip">No extra cost</span>
             </div>
           </div>
+
+          <!-- Panel 5: Tax Code Mapping -->
+          <div class="cap-panel" data-panel="5">
+            <h3 style="font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:0.75rem;">Sales tax applied correctly, every time.</h3>
+            <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:1.25rem;">Map Jobber service categories to the right QuickBooks tax codes once. Every invoice that syncs gets the correct sales tax rate applied automatically. No more guessing which rate applies to a $200 capacitor vs. a $150 diagnostic fee.</p>
+            <div style="border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem;background:#0d0d10;">
+              <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0.5rem;font-size:0.8rem;">
+                <span style="color:var(--text-muted);font-weight:600;">Service Type</span>
+                <span></span>
+                <span style="color:var(--text-muted);font-weight:600;">Tax Code</span>
+                <span style="color:var(--text-secondary);">Labor &mdash; HVAC Repair</span>
+                <span style="color:var(--cyan);">&rarr;</span>
+                <span style="color:var(--text-secondary);">TX-SVC &middot; 8.25%</span>
+                <span style="color:var(--text-secondary);">Parts &mdash; Hardware</span>
+                <span style="color:var(--cyan);">&rarr;</span>
+                <span style="color:var(--text-secondary);">TX-GOODS &middot; 8.25%</span>
+                <span style="color:var(--text-secondary);">Warranty Work</span>
+                <span style="color:var(--cyan);">&rarr;</span>
+                <span style="color:var(--text-secondary);">TAX-EXEMPT &middot; 0%</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="cap-chip">Per-category rules</span>
+              <span class="cap-chip">Exempt handling</span>
+              <span class="cap-chip">Multi-state ready</span>
+            </div>
+          </div>
+
+          <!-- Panel 6: Sync Dashboard -->
+          <div class="cap-panel" data-panel="6">
+            <h3 style="font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:0.75rem;">One screen to see everything that synced.</h3>
+            <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:1.25rem;">A simple dashboard shows every job that synced today, any items waiting for review, and your overall sync health. No digging through email alerts or checking two systems separately. Open it in the morning, clear the queue, move on.</p>
+            <div style="border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.25rem;background:#0d0d10;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:0.75rem;">
+                <div style="text-align:center;">
+                  <p style="margin:0;font-size:1.5rem;font-weight:800;color:#22c55e;">47</p>
+                  <p style="margin:0;font-size:0.7rem;color:var(--text-muted);">Synced this week</p>
+                </div>
+                <div style="text-align:center;">
+                  <p style="margin:0;font-size:1.5rem;font-weight:800;color:var(--cyan);">2</p>
+                  <p style="margin:0;font-size:0.7rem;color:var(--text-muted);">Needs review</p>
+                </div>
+                <div style="text-align:center;">
+                  <p style="margin:0;font-size:1.5rem;font-weight:800;color:var(--text-primary);">99.6%</p>
+                  <p style="margin:0;font-size:0.7rem;color:var(--text-muted);">Sync rate</p>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <span class="cap-chip">Daily digest</span>
+              <span class="cap-chip">Error queue</span>
+              <span class="cap-chip">Sync history</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -558,8 +615,8 @@
             Jobber closes jobs. QuickBooks needs invoices. <span class="gradient-text">You're stuck in the middle.</span>
           </h2>
         </div>
-        <div class="reveal reveal-delay-2 mobile-hide-img" style="border-radius:16px;overflow:hidden;background:var(--surface);display:flex;align-items:center;justify-content:center;min-height:200px;">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1" stroke-linecap="round" style="opacity:0.3;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div class="reveal reveal-delay-2 mobile-hide-img" style="border-radius:16px;overflow:hidden;">
+          <img src="images/problem-overwhelmed.png" alt="Office manager frustrated by manual invoice data entry between Jobber and QuickBooks" style="width:100%;height:auto;display:block;" loading="lazy" onerror="this.parentElement.style.background='var(--surface)';this.parentElement.style.minHeight='200px';this.style.display='none';" />
         </div>
       </div>
 
@@ -670,6 +727,17 @@
           </div>
           <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Tech closes the job in Jobber</h3>
           <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">Your field tech marks the job complete in the Jobber app, just like they always do. Nothing changes for the crew. The webhook fires the moment the status flips.</p>
+          <div style="margin-top:1.5rem;display:flex;justify-content:center;">
+            <svg width="200" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="40" y="10" width="120" height="60" rx="12" fill="rgba(249,115,22,0.06)" stroke="rgba(249,115,22,0.2)" stroke-width="1"/>
+              <circle cx="70" cy="32" r="8" fill="rgba(249,115,22,0.1)" stroke="var(--cyan)" stroke-width="1"/>
+              <path d="M67 32l2 2 4-4" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="85" y="28" width="55" height="3" rx="1.5" fill="rgba(255,255,255,0.1)"/>
+              <rect x="85" y="35" width="35" height="2" rx="1" fill="rgba(255,255,255,0.05)"/>
+              <rect x="55" y="50" width="90" height="12" rx="6" fill="rgba(249,115,22,0.15)"/>
+              <text x="100" y="59" text-anchor="middle" font-size="7" font-family="Inter" font-weight="600" fill="var(--cyan)">Job Complete</text>
+            </svg>
+          </div>
         </div>
 
         <div class="glass-card reveal reveal-delay-2" style="position:relative;overflow:hidden;">
@@ -682,6 +750,20 @@
           </div>
           <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Line items mapped to QB accounts</h3>
           <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">JobberInvoice reads each service line, part, and labor entry from the job. It maps them to your QuickBooks income accounts using the rules you set up once. Tax codes applied automatically.</p>
+          <div style="margin-top:1.5rem;display:flex;justify-content:center;">
+            <svg width="200" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="20" width="70" height="40" rx="8" fill="rgba(249,115,22,0.06)" stroke="rgba(249,115,22,0.2)" stroke-width="1"/>
+              <text x="45" y="37" text-anchor="middle" font-size="6" font-family="JetBrains Mono" fill="var(--text-muted)">JOBBER</text>
+              <rect x="25" y="43" width="40" height="2" rx="1" fill="rgba(255,255,255,0.08)"/>
+              <rect x="25" y="48" width="30" height="2" rx="1" fill="rgba(255,255,255,0.05)"/>
+              <path d="M90 40 L110 40" stroke="var(--cyan)" stroke-width="1.5" stroke-dasharray="4 2"/>
+              <polygon points="112,40 108,37 108,43" fill="var(--cyan)"/>
+              <rect x="120" y="20" width="70" height="40" rx="8" fill="rgba(34,197,94,0.06)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+              <text x="155" y="37" text-anchor="middle" font-size="6" font-family="JetBrains Mono" fill="var(--text-muted)">QUICKBOOKS</text>
+              <rect x="135" y="43" width="40" height="2" rx="1" fill="rgba(255,255,255,0.08)"/>
+              <rect x="135" y="48" width="30" height="2" rx="1" fill="rgba(255,255,255,0.05)"/>
+            </svg>
+          </div>
         </div>
 
         <div class="glass-card reveal reveal-delay-3" style="position:relative;overflow:hidden;">
@@ -694,6 +776,21 @@
           </div>
           <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Invoice drafts in QuickBooks</h3>
           <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">A complete invoice draft appears in QB with the right customer, line items, amounts, and tax. No copy-paste, no retyping. If anything doesn't match, you get an alert instead of a broken invoice.</p>
+          <div style="margin-top:1.5rem;display:flex;justify-content:center;">
+            <svg width="200" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="40" y="5" width="120" height="70" rx="10" fill="rgba(34,197,94,0.04)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+              <text x="100" y="22" text-anchor="middle" font-size="7" font-family="Inter" font-weight="600" fill="var(--text-primary)">Invoice #4291</text>
+              <line x1="55" y1="28" x2="145" y2="28" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+              <rect x="55" y="34" width="60" height="2" rx="1" fill="rgba(255,255,255,0.08)"/>
+              <rect x="125" y="34" width="20" height="2" rx="1" fill="rgba(255,255,255,0.08)"/>
+              <rect x="55" y="41" width="50" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+              <rect x="125" y="41" width="20" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+              <rect x="55" y="48" width="45" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+              <rect x="125" y="48" width="20" height="2" rx="1" fill="rgba(255,255,255,0.06)"/>
+              <line x1="55" y1="55" x2="145" y2="55" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+              <text x="100" y="66" text-anchor="middle" font-size="8" font-family="Inter" font-weight="700" fill="#22c55e">$847.50</text>
+            </svg>
+          </div>
         </div>
 
         <div class="glass-card reveal reveal-delay-1" style="position:relative;overflow:hidden;">
@@ -706,6 +803,14 @@
           </div>
           <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:0.5rem;">Review once, send to customer</h3>
           <p style="color:var(--text-secondary);line-height:1.65;font-size:0.95rem;">The office manager glances at the draft, confirms it looks right, and hits send. What used to take 15 minutes of data entry per job now takes a 10-second review. Customers get invoiced the same day.</p>
+          <div style="margin-top:1.5rem;display:flex;justify-content:center;">
+            <svg width="200" height="80" viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="50" y="15" width="100" height="50" rx="10" fill="rgba(34,197,94,0.06)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+              <circle cx="100" cy="35" r="12" fill="rgba(34,197,94,0.1)" stroke="#22c55e" stroke-width="1.5"/>
+              <path d="M95 35l3 3 7-7" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="100" y="57" text-anchor="middle" font-size="7" font-family="Inter" font-weight="600" fill="#22c55e">Sent to Customer</text>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
@@ -722,8 +827,8 @@
           <p class="section-label">Built For</p>
           <h2 class="section-title">Built for <span class="gradient-text">field service teams on Jobber.</span></h2>
         </div>
-        <div class="reveal reveal-delay-2 mobile-hide-img" style="border-radius:16px;overflow:hidden;background:var(--surface);display:flex;align-items:center;justify-content:center;min-height:180px;">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1" stroke-linecap="round" style="opacity:0.3;"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <div class="reveal reveal-delay-2 mobile-hide-img" style="border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.35);">
+          <img src="images/built-for-persona.png" alt="Field service team using Jobber on mobile while invoices sync to QuickBooks automatically" style="width:100%;height:auto;display:block;" loading="lazy" onerror="this.parentElement.style.background='var(--surface)';this.parentElement.style.minHeight='180px';this.style.display='none';" />
         </div>
       </div>
 
@@ -805,8 +910,12 @@
           <p style="color:var(--cyan);font-size:0.85rem;line-height:1.6;margin:0;">We're building this if 50 shops sign up &mdash; help us validate the idea.</p>
         </div>
 
-        <!-- Right: form -->
+        <!-- Right: trust image + progressive disclosure form -->
         <div class="reveal reveal-delay-1">
+          <div class="mobile-hide-img" style="margin-bottom:1.5rem;border-radius:12px;overflow:hidden;">
+            <img src="images/early-access-trust.png" alt="JobberInvoice early access preview showing invoice sync dashboard" style="width:100%;height:auto;display:block;" loading="lazy" onerror="this.parentElement.style.display='none';" />
+          </div>
+
           <!-- Success state -->
           <div id="success-message" style="display:none;padding:2.5rem 0;">
             <div style="width:3rem;height:3rem;background:rgba(249,115,22,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
