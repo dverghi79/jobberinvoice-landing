@@ -1049,18 +1049,6 @@
     // ── Config ──
     var CALENDLY_URL = 'https://calendly.com/leanaistudio/founder-call';
 
-    // ── DKI Headline Replacement ──
-    (function() {
-      var params = new URLSearchParams(window.location.search);
-      var custom = params.get('headline');
-      if (custom) {
-        var h1 = document.getElementById('hero-headline');
-        if (h1) {
-          h1.setAttribute('data-default-headline', h1.innerHTML);
-          h1.textContent = decodeURIComponent(custom.replace(/\+/g, ' '));
-        }
-      }
-    })();
 
     // ── Scroll reveal ──
     (function() {
